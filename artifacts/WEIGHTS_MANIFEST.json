@@ -1,0 +1,96 @@
+{
+ "created": "2026-10-18 19:32:00",
+ "tag": "xplus-sf",
+ "files": {
+  "models/cross-ctx/config.json": {
+   "sha256": "f326c6155dba522ce4f3e1d2ff5ace7b448377be7f9c70868bb1800235685141",
+   "bytes": 802,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-ctx/model.safetensors": {
+   "sha256": "97629bfe0431fe2bb5eed5de8c84f4ad767cb055dd58993a4c6d7a5a358fad35",
+   "bytes": 437961716,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-ctx/tokenizer.json": {
+   "sha256": "5c7112bba6a3c6d53d451a879cb4d3c798808ccfefc016c0eb6f7f6caa0691bd",
+   "bytes": 706634,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-ctx/tokenizer_config.json": {
+   "sha256": "4aa01faf9d16741abeaa248e97536793f1020d752fdb401a6e1d0bf4fb69ed0b",
+   "bytes": 454,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-noctx/config.json": {
+   "sha256": "f326c6155dba522ce4f3e1d2ff5ace7b448377be7f9c70868bb1800235685141",
+   "bytes": 802,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-noctx/model.safetensors": {
+   "sha256": "9177011b4eb7cf3f0ef0bbbbe81a0bc1084915eb0eadfba6a6ddddc012c52bbb",
+   "bytes": 437961716,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-noctx/tokenizer.json": {
+   "sha256": "52cc6b555a2bdf5bfc54f27765d00c4c865fd562f59928208be2bc2f06c10fc9",
+   "bytes": 706633,
+   "part": "weights_part1.zip"
+  },
+  "models/cross-noctx/tokenizer_config.json": {
+   "sha256": "4aa01faf9d16741abeaa248e97536793f1020d752fdb401a6e1d0bf4fb69ed0b",
+   "bytes": 454,
+   "part": "weights_part1.zip"
+  },
+  "models/sapbert-ft/config.json": {
+   "sha256": "f8aef991c62601e2f9faf33e08cf7a8b7d9771cb4234de6d3f026e3482221527",
+   "bytes": 734,
+   "part": "weights_part1.zip"
+  },
+  "models/sapbert-ft/model.safetensors": {
+   "sha256": "47b0b57650f4aa44e827f5e6e4829e5c322eaa206fe52e17ad442e48ee84e17a",
+   "bytes": 437951328,
+   "part": "weights_part1.zip"
+  },
+  "models/sapbert-ft/tokenizer.json": {
+   "sha256": "d0c24728b56eeb148bac4e28d5523e09658d83e9dc5310b021ec8c5ab03ac2be",
+   "bytes": 706276,
+   "part": "weights_part1.zip"
+  },
+  "models/sapbert-ft/tokenizer_config.json": {
+   "sha256": "2681edebf9ca0a55beb442e05ccf1bad5011ecd08ede81b9e80728352444c191",
+   "bytes": 426,
+   "part": "weights_part1.zip"
+  },
+  "data/processed/lexical_ICD10CM.pkl": {
+   "sha256": "f7fabe4ac3fd3a62b249b69936b41e3efe69a11dc49e0c1d663eaf1df1450f1f",
+   "bytes": 191826838,
+   "part": "weights_part1.zip"
+  },
+  "data/processed/lexical_SNOMEDCT_US.pkl": {
+   "sha256": "5fc8a2bdb09ae4eaaf46d17bedcfa91b1e251c95957c18d819e01c7ed3d94331",
+   "bytes": 290357465,
+   "part": "weights_part1.zip"
+  },
+  "data/processed/dense_ICD10CM.npy": {
+   "sha256": "82b8731a735414650a895c12cff0ef7730ba2e6b99a01ccb49ca23e102d9f24e",
+   "bytes": 434726528,
+   "part": "weights_part2.zip"
+  },
+  "data/processed/dense_SNOMEDCT_US.npy": {
+   "sha256": "4796a0feeec66f5fe91e869b9c0649425ea8aabaaa7a307d401c8ee4e968eb7f",
+   "bytes": 934070912,
+   "part": "weights_part2.zip"
+  }
+ },
+ "parts": {
+  "weights_part1.zip": {
+   "bytes": 1798184318,
+   "sha256": "7aae1efec16e5e1c4895f2cd6f59c94233770e58d55d48d5a4c35f0555e042ab"
+  },
+  "weights_part2.zip": {
+   "bytes": 1368797750,
+   "sha256": "5944671ec02d902eb733c1eed9b728694946abe5d8e3d6d6bc10dbb3fd747fef"
+  }
+ }
+}

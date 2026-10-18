@@ -1,0 +1,4 @@
+# Large trained weights are stored with Git LFS (GitHub rejects plain files > 100 MB). `git lfs install` before cloning.
+*.safetensors filter=lfs diff=lfs merge=lfs -text
+data/processed/dense_*.npy filter=lfs diff=lfs merge=lfs -text
+data/processed/lexical_*.pkl filter=lfs diff=lfs merge=lfs -text

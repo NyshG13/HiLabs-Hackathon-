@@ -1,0 +1,17 @@
+# secrets: never commit real keys (see .env.example)
+.env
+# python
+.venv/
+__pycache__/
+*.pyc
+# public base models, downloaded by setup_model.py at pinned revisions (not trained by us; Qwen2.5 is > 2 GB)
+models/hf_cache/
+artifacts/plus/hf_cache/
+# run-time caches and outputs
+cache/
+outputs/
+artifacts/plus/sf/*cache*
+artifacts/plus/ce_cache.parquet
+artifacts/plus/llm_cache.jsonl
+submission/predictions.csv
+submission/demo_predictions.csv

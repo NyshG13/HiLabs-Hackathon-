@@ -1,0 +1,8 @@
+{
+ "scope_values": [
+  "DiagnosisCode"
+ ],
+ "rows_in_scope": 5005,
+ "icd_rows_outside_scope": 1,
+ "note": "1 ICD row (train, ProcedureCode) falls outside; dev/test ICD rows are 100% in scope"
+}

@@ -1,0 +1,31 @@
+# TermMap-X+ flags. Every improvement is OFF until its ledger step KEEPs it.
+# Vanilla X is never modified: these flags are read only by termmap_plus/.
+scope_values: [DiagnosisCode]
+predict_subconcept_constant: DiagnosisCode   # leak fix: eval set is diagnosis-only (Step 0)
+seed: 13
+cv_folds: 5
+
+part1:
+  llm_gate: {ICD10CM: true, SNOMEDCT_US: true}   # 1.1 (vanilla default: on for both)
+  id_formats: false          # 1.2
+  snomed_tag_scope: false    # 1.3
+  all_synonyms: false        # 1.4
+  train_aliases: false       # 1.5
+  abbreviations: false       # 1.6
+  messy_text: false          # 1.7
+  cdc_names: false           # 1.8
+  icd_tree_siblings: false   # 1.9
+  guaranteed_slots: false    # 1.10
+  pool_size: 64
+
+part2:
+  tree_features: false       # 2.1
+  lexical_traps: false       # 2.2
+  checklist: false           # 2.3
+  specificity_policy: false  # 2.4
+  abbrev_context: false      # 2.5
+  tag_classifier: false      # 2.6
+  qwen_reranker: false       # 2.7
+  safe_fallback: false       # 2.8
+  joint_confidence: false    # 2.9
+  final_model: logreg        # logreg | lightgbm

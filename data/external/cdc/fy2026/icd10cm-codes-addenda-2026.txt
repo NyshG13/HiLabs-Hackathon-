@@ -1,0 +1,598 @@
+Delete:      B880    Other acariasis
+Add:         B8801   Infestation by Demodex mites
+Add:         B8809   Other acariasis
+Add:         C50A0   Malignant inflammatory neoplasm of unspecified breast
+Add:         C50A1   Malignant inflammatory neoplasm of right breast
+Add:         C50A2   Malignant inflammatory neoplasm of left breast
+Delete:      D71     Functional disorders of polymorphonuclear neutrophils
+Add:         D711    Leukocyte adhesion deficiency
+Add:         D718    Other functional disorders of polymorphonuclear neutrophils
+Add:         D719    Functional disorders of polymorphonuclear neutrophils, unspecified
+Add:         E11A    Type 2 diabetes mellitus without complications in remission
+Delete:      E7253   Primary hyperoxaluria
+Add:         E72530  Primary hyperoxaluria, type 1
+Add:         E72538  Other specified primary hyperoxaluria
+Add:         E72539  Primary hyperoxaluria, unspecified
+Add:         E72540  Dietary hyperoxaluria
+Add:         E72541  Enteric hyperoxaluria
+Add:         E72548  Other secondary hyperoxaluria
+Add:         E72549  Secondary hyperoxaluria, unspecified
+Delete:      E7801   Familial hypercholesterolemia
+Add:         E78010  Homozygous familial hypercholesterolemia [HoFH]
+Add:         E78011  Heterozygous familial hypercholesterolemia [HeFH]
+Add:         E78019  Familial hypercholesterolemia, unspecified
+Add:         E83820  Generalized arterial calcification of infancy with unspecified genetic causality
+Add:         E83821  ENPP1 deficiency causing generalized arterial calcification of infancy
+Add:         E83822  ENPP1 deficiency causing autosomal recessive hypophosphatemic rickets type 2
+Add:         E83823  ABCC6 deficiency causing generalized arterial calcification of infancy
+Add:         E83824  ABCC6 deficiency causing pseudoxanthoma elasticum
+Add:         E83825  CD73 deficiency causing arterial calcification
+Delete:      E881    Lipodystrophy, not elsewhere classified
+Add:         E8810   Lipodystrophy, unspecified
+Add:         E8811   Partial lipodystrophy
+Add:         E8812   Generalized lipodystrophy
+Add:         E8813   Localized lipodystrophy
+Add:         E8814   HIV-associated lipodystrophy
+Add:         E8819   Other lipodystrophy, not elsewhere classified
+Add:         G3187   Primary progressive apraxia of speech
+Delete:      G35     Multiple sclerosis
+Add:         G35A    Relapsing-remitting multiple sclerosis
+Add:         G35B0   Primary progressive multiple sclerosis, unspecified
+Add:         G35B1   Active primary progressive multiple sclerosis
+Add:         G35B2   Non-active primary progressive multiple sclerosis
+Add:         G35C0   Secondary progressive multiple sclerosis, unspecified
+Add:         G35C1   Active secondary progressive multiple sclerosis
+Add:         G35C2   Non-active secondary progressive multiple sclerosis
+Add:         G35D    Multiple sclerosis, unspecified
+Add:         G71036  Limb girdle muscular dystrophy due to fukutin related protein dysfunction
+Delete:      H018    Other specified inflammations of eyelid
+Add:         H0181   Other specified inflammation of right upper eyelid
+Add:         H0182   Other specified inflammation of right lower eyelid
+Add:         H0183   Other specified inflammation of right eye, unspecified eyelid
+Add:         H0184   Other specified inflammation of left upper eyelid
+Add:         H0185   Other specified inflammation of left lower eyelid
+Add:         H0186   Other specified inflammation of left eye, unspecified eyelid
+Add:         H0189   Other specified inflammation of unspecified eye, unspecified eyelid
+Add:         H018A   Other specified inflammation of right eye, upper and lower eyelids
+Add:         H018B   Other specified inflammation of left eye, upper and lower eyelids
+Add:         H05831  Thyroid orbitopathy, right orbit
+Add:         H05832  Thyroid orbitopathy, left orbit
+Add:         H05833  Thyroid orbitopathy, bilateral
+Add:         H05839  Thyroid orbitopathy, unspecified orbit
+Add:         H40841  Neovascular secondary angle closure glaucoma, right eye
+Add:         H40842  Neovascular secondary angle closure glaucoma, left eye
+Add:         H40843  Neovascular secondary angle closure glaucoma, bilateral
+Add:         H40849  Neovascular secondary angle closure glaucoma, unspecified eye
+Add:         I27840  Fontan-associated liver disease [FALD]
+Add:         I27841  Fontan-associated lymphatic dysfunction
+Add:         I27848  Other Fontan-associated condition
+Add:         I27849  Fontan related circulation, unspecified
+Revise from: L02212  Cutaneous abscess of back [any part, except buttock]
+Revise to:   L02212  Cutaneous abscess of back [any part, except buttock and flank]
+Add:         L02217  Cutaneous abscess of flank
+Revise from: L02222  Furuncle of back [any part, except buttock]
+Revise to:   L02222  Furuncle of back [any part, except buttock and flank]
+Add:         L02227  Furuncle of flank
+Add:         L0331A  Cellulitis of flank
+Add:         L0332A  Acute lymphangitis of flank
+Add:         L98431  Non-pressure chronic ulcer of abdomen limited to breakdown of skin
+Add:         L98432  Non-pressure chronic ulcer of abdomen with fat layer exposed
+Add:         L98433  Non-pressure chronic ulcer of abdomen with necrosis of muscle
+Add:         L98434  Non-pressure chronic ulcer of abdomen with necrosis of bone
+Add:         L98435  Non-pressure chronic ulcer of abdomen with muscle involvement without evidence of necrosis
+Add:         L98436  Non-pressure chronic ulcer of abdomen with bone involvement without evidence of necrosis
+Add:         L98438  Non-pressure chronic ulcer of abdomen with other specified severity
+Add:         L98439  Non-pressure chronic ulcer of abdomen with unspecified severity
+Add:         L98441  Non-pressure chronic ulcer of chest limited to breakdown of skin
+Add:         L98442  Non-pressure chronic ulcer of chest with fat layer exposed
+Add:         L98443  Non-pressure chronic ulcer of chest with necrosis of muscle
+Add:         L98444  Non-pressure chronic ulcer of chest with necrosis of bone
+Add:         L98445  Non-pressure chronic ulcer of chest with muscle involvement without evidence of necrosis
+Add:         L98446  Non-pressure chronic ulcer of chest with bone involvement without evidence of necrosis
+Add:         L98448  Non-pressure chronic ulcer of chest with other specified severity
+Add:         L98449  Non-pressure chronic ulcer of chest with unspecified severity
+Add:         L98451  Non-pressure chronic ulcer of neck limited to breakdown of skin
+Add:         L98452  Non-pressure chronic ulcer of neck with fat layer exposed
+Add:         L98453  Non-pressure chronic ulcer of neck with necrosis of muscle
+Add:         L98454  Non-pressure chronic ulcer of neck with necrosis of bone
+Add:         L98455  Non-pressure chronic ulcer of neck with muscle involvement without evidence of necrosis
+Add:         L98456  Non-pressure chronic ulcer of neck with bone involvement without evidence of necrosis
+Add:         L98458  Non-pressure chronic ulcer of neck with other specified severity
+Add:         L98459  Non-pressure chronic ulcer of neck with unspecified severity
+Add:         L98461  Non-pressure chronic ulcer of face limited to breakdown of skin
+Add:         L98462  Non-pressure chronic ulcer of face with fat layer exposed
+Add:         L98463  Non-pressure chronic ulcer of face with necrosis of muscle
+Add:         L98464  Non-pressure chronic ulcer of face with necrosis of bone
+Add:         L98465  Non-pressure chronic ulcer of face with muscle involvement without evidence of necrosis
+Add:         L98466  Non-pressure chronic ulcer of face with bone involvement without evidence of necrosis
+Add:         L98468  Non-pressure chronic ulcer of face with other specified severity
+Add:         L98469  Non-pressure chronic ulcer of face with unspecified severity
+Add:         L98471  Non-pressure chronic ulcer of groin limited to breakdown of skin
+Add:         L98472  Non-pressure chronic ulcer of groin with fat layer exposed
+Add:         L98473  Non-pressure chronic ulcer of groin with necrosis of muscle
+Add:         L98474  Non-pressure chronic ulcer of groin with necrosis of bone
+Add:         L98475  Non-pressure chronic ulcer of groin with muscle involvement without evidence of necrosis
+Add:         L98476  Non-pressure chronic ulcer of groin with bone involvement without evidence of necrosis
+Add:         L98478  Non-pressure chronic ulcer of groin with other specified severity
+Add:         L98479  Non-pressure chronic ulcer of groin with unspecified severity
+Add:         L98A111 Non-pressure chronic ulcer of right upper arm limited to breakdown of skin
+Add:         L98A112 Non-pressure chronic ulcer of right upper arm with fat layer exposed
+Add:         L98A113 Non-pressure chronic ulcer of right upper arm with necrosis of muscle
+Add:         L98A114 Non-pressure chronic ulcer of right upper arm with necrosis of bone
+Add:         L98A115 Non-pressure chronic ulcer of right upper arm with muscle involvement without evidence of necrosis
+Add:         L98A116 Non-pressure chronic ulcer of right upper arm with bone involvement without evidence of necrosis
+Add:         L98A118 Non-pressure chronic ulcer of right upper arm with other specified severity
+Add:         L98A119 Non-pressure chronic ulcer of right upper arm with unspecified severity
+Add:         L98A121 Non-pressure chronic ulcer of left upper arm limited to breakdown of skin
+Add:         L98A122 Non-pressure chronic ulcer of left upper arm with fat layer exposed
+Add:         L98A123 Non-pressure chronic ulcer of left upper arm with necrosis of muscle
+Add:         L98A124 Non-pressure chronic ulcer of left upper arm with necrosis of bone
+Add:         L98A125 Non-pressure chronic ulcer of left upper arm with muscle involvement without evidence of necrosis
+Add:         L98A126 Non-pressure chronic ulcer of left upper arm with bone involvement without evidence of necrosis
+Add:         L98A128 Non-pressure chronic ulcer of left upper arm with other specified severity
+Add:         L98A129 Non-pressure chronic ulcer of left upper arm with unspecified severity
+Add:         L98A191 Non-pressure chronic ulcer of unspecified upper arm limited to breakdown of skin
+Add:         L98A192 Non-pressure chronic ulcer of unspecified upper arm with fat layer exposed
+Add:         L98A193 Non-pressure chronic ulcer of unspecified upper arm with necrosis of muscle
+Add:         L98A194 Non-pressure chronic ulcer of unspecified upper arm with necrosis of bone
+Add:         L98A195 Non-pressure chronic ulcer of unspecified upper arm with muscle involvement without evidence of necrosis
+Add:         L98A196 Non-pressure chronic ulcer of unspecified upper arm with bone involvement without evidence of necrosis
+Add:         L98A198 Non-pressure chronic ulcer of unspecified upper arm with other specified severity
+Add:         L98A199 Non-pressure chronic ulcer of unspecified upper arm with unspecified severity
+Add:         L98A211 Non-pressure chronic ulcer of right forearm limited to breakdown of skin
+Add:         L98A212 Non-pressure chronic ulcer of right forearm with fat layer exposed
+Add:         L98A213 Non-pressure chronic ulcer of right forearm with necrosis of muscle
+Add:         L98A214 Non-pressure chronic ulcer of right forearm with necrosis of bone
+Add:         L98A215 Non-pressure chronic ulcer of right forearm with muscle involvement without evidence of necrosis
+Add:         L98A216 Non-pressure chronic ulcer of right forearm with bone involvement without evidence of necrosis
+Add:         L98A218 Non-pressure chronic ulcer of right forearm with other specified severity
+Add:         L98A219 Non-pressure chronic ulcer of right forearm with unspecified severity
+Add:         L98A221 Non-pressure chronic ulcer of left forearm limited to breakdown of skin
+Add:         L98A222 Non-pressure chronic ulcer of left forearm with fat layer exposed
+Add:         L98A223 Non-pressure chronic ulcer of left forearm with necrosis of muscle
+Add:         L98A224 Non-pressure chronic ulcer of left forearm with necrosis of bone
+Add:         L98A225 Non-pressure chronic ulcer of left forearm with muscle involvement without evidence of necrosis
+Add:         L98A226 Non-pressure chronic ulcer of left forearm with bone involvement without evidence of necrosis
+Add:         L98A228 Non-pressure chronic ulcer of left forearm with other specified severity
+Add:         L98A229 Non-pressure chronic ulcer of left forearm with unspecified severity
+Add:         L98A291 Non-pressure chronic ulcer of unspecified forearm limited to breakdown of skin
+Add:         L98A292 Non-pressure chronic ulcer of unspecified forearm with fat layer exposed
+Add:         L98A293 Non-pressure chronic ulcer of unspecified forearm with necrosis of muscle
+Add:         L98A294 Non-pressure chronic ulcer of unspecified forearm with necrosis of bone
+Add:         L98A295 Non-pressure chronic ulcer of unspecified forearm with muscle involvement without evidence of necrosis
+Add:         L98A296 Non-pressure chronic ulcer of unspecified forearm with bone involvement without evidence of necrosis
+Add:         L98A298 Non-pressure chronic ulcer of unspecified forearm with other specified severity
+Add:         L98A299 Non-pressure chronic ulcer of unspecified forearm with unspecified severity
+Add:         L98A311 Non-pressure chronic ulcer of right hand limited to breakdown of skin
+Add:         L98A312 Non-pressure chronic ulcer of right hand with fat layer exposed
+Add:         L98A313 Non-pressure chronic ulcer of right hand with necrosis of muscle
+Add:         L98A314 Non-pressure chronic ulcer of right hand with necrosis of bone
+Add:         L98A315 Non-pressure chronic ulcer of right hand with muscle involvement without evidence of necrosis
+Add:         L98A316 Non-pressure chronic ulcer of right hand with bone involvement without evidence of necrosis
+Add:         L98A318 Non-pressure chronic ulcer of right hand with other specified severity
+Add:         L98A319 Non-pressure chronic ulcer of right hand with unspecified severity
+Add:         L98A321 Non-pressure chronic ulcer of left hand limited to breakdown of skin
+Add:         L98A322 Non-pressure chronic ulcer of left hand with fat layer exposed
+Add:         L98A323 Non-pressure chronic ulcer of left hand with necrosis of muscle
+Add:         L98A324 Non-pressure chronic ulcer of left hand with necrosis of bone
+Add:         L98A325 Non-pressure chronic ulcer of left hand with muscle involvement without evidence of necrosis
+Add:         L98A326 Non-pressure chronic ulcer of left hand with bone involvement without evidence of necrosis
+Add:         L98A328 Non-pressure chronic ulcer of left hand with other specified severity
+Add:         L98A329 Non-pressure chronic ulcer of left hand with unspecified severity
+Add:         L98A391 Non-pressure chronic ulcer of unspecified hand limited to breakdown of skin
+Add:         L98A392 Non-pressure chronic ulcer of unspecified hand with fat layer exposed
+Add:         L98A393 Non-pressure chronic ulcer of unspecified hand with necrosis of muscle
+Add:         L98A394 Non-pressure chronic ulcer of unspecified hand with necrosis of bone
+Add:         L98A395 Non-pressure chronic ulcer of unspecified hand with muscle involvement without evidence of necrosis
+Add:         L98A396 Non-pressure chronic ulcer of unspecified hand with bone involvement without evidence of necrosis
+Add:         L98A398 Non-pressure chronic ulcer of unspecified hand with other specified severity
+Add:         L98A399 Non-pressure chronic ulcer of unspecified hand with unspecified severity
+Add:         M05A    Abnormal rheumatoid factor and anti-citrullinated protein antibody with rheumatoid arthritis
+Revise from: M21159  Varus deformity, not elsewhere classified, unspecified
+Revise to:   M21159  Varus deformity, not elsewhere classified, unspecified hip
+Revise from: M24076  Loose body in unspecified toe joints
+Revise to:   M24076  Loose body in unspecified toe joint(s)
+Revise from: M61129  Myositis ossificans progressiva, unspecified arm
+Revise to:   M61129  Myositis ossificans progressiva, unspecified upper arm
+Add:         N00B1   Acute nephritic syndrome with idiopathic immune membranoproliferative glomerulonephritis (IC-MPGN)
+Add:         N00B2   Acute nephritic syndrome with secondary immune complex membranoproliferative glomerulonephritis (IC-MPGN)
+Add:         N04B1   Nephrotic syndrome with idiopathic immune complex membranoproliferative glomerulonephritis (IC-MPGN)
+Add:         N04B2   Nephrotic syndrome with secondary immune complex membranoproliferative glomerulonephritis (IC-MPGN)
+Add:         N07B    Hereditary nephropathy, not elsewhere classified with APOL1-mediated kidney disease [AMKD]
+Revise from: P096    Abnormal findings on neonatal screening for neonatal hearing loss
+Revise to:   P096    Abnormal findings on neonatal hearing screening
+Revise from: Q75001  Craniosynostosis unspecified, unilateral
+Revise to:   Q75001  Craniosynostosis, unspecified type, unilateral
+Revise from: Q75002  Craniosynostosis unspecified, bilateral
+Revise to:   Q75002  Craniosynostosis, unspecified type, bilateral
+Revise from: Q75009  Craniosynostosis unspecified
+Revise to:   Q75009  Craniosynostosis, unspecified
+Revise from: Q75021  Coronal craniosynostosis unilateral
+Revise to:   Q75021  Coronal craniosynostosis, unilateral
+Revise from: Q75022  Coronal craniosynostosis bilateral
+Revise to:   Q75022  Coronal craniosynostosis, bilateral
+Revise from: Q75029  Coronal craniosynostosis unspecified
+Revise to:   Q75029  Coronal craniosynostosis, unspecified
+Add:         Q8787   Hao-Fountain Syndrome
+Add:         Q8788   CTNNB1 syndrome
+Delete:      Q898    Other specified congenital malformations
+Add:         Q8981   Kabuki syndrome
+Add:         Q8989   Other specified congenital malformations
+Delete:      Q998    Other specified chromosome abnormalities
+Add:         Q99811  Usher syndrome, type 1
+Add:         Q99812  Usher syndrome, type 2
+Add:         Q99813  Usher syndrome, type 3
+Add:         Q99818  Other Usher syndrome
+Add:         Q99819  Usher syndrome, unspecified
+Add:         Q9989   Other specified chromosome abnormalities
+Add:         QA00101 SCN2A-related neurodevelopmental disorder
+Add:         QA00102 CACNA1A-related neurodevelopmental disorder
+Add:         QA00109 Neurodevelopmental disorder related to pathogenic variant in other ion channel gene
+Add:         QA0011  Neurodevelopmental disorders, related to pathogenic variants in glutamate receptor genes
+Add:         QA0012  Neurodevelopmental disorders, related to pathogenic variants in other receptor genes
+Add:         QA00131 SLC6A1-related disorder
+Add:         QA00139 Neurodevelopmental disorder, related to pathogenic variant in other transporter or solute carrier gene
+Add:         QA00141 Syntaxin-binding protein 1-related disorder
+Add:         QA00142 DLG4-related synaptopathy
+Add:         QA00149 Neurodevelopmental disorder, related to pathogenic variant in other synapse related gene
+Add:         QA00151 FOXG1 syndrome
+Add:         QA00159 Neurodevelopmental disorder, related to other genes associated with transcription and gene expression
+Add:         QA08    Other neurodevelopmental disorders related to pathogenic variants in other specific genes
+Delete:      R102    Pelvic and perineal pain
+Add:         R1020   Pelvic and perineal pain unspecified side
+Add:         R1021   Pelvic and perineal pain right side
+Add:         R1022   Pelvic and perineal pain left side
+Add:         R1023   Pelvic and perineal pain bilateral
+Add:         R1024   Suprapubic pain
+Add:         R1085   Abdominal pain of multiple sites
+Add:         R108A1  Right flank tenderness
+Add:         R108A2  Left flank tenderness
+Add:         R108A3  Suprapubic tenderness
+Add:         R108A9  Flank tenderness, unspecified
+Add:         R10A0   Flank pain, unspecified side
+Add:         R10A1   Flank pain, right side
+Add:         R10A2   Flank pain, left side
+Add:         R10A3   Flank pain, bilateral
+Add:         R1116   Cannabis hyperemesis syndrome
+Add:         R39851  Costovertebral (angle) tenderness, right side
+Add:         R39852  Costovertebral (angle) tenderness, left side
+Add:         R39853  Costovertebral (angle) tenderness, bilateral
+Add:         R39859  Costovertebral (angle) tenderness, unspecified side
+Delete:      R768    Other specified abnormal immunological findings in serum
+Add:         R7681   Abnormal rheumatoid factor and anti-citrullinated protein antibody without rheumatoid arthritis
+Add:         R7689   Other specified abnormal immunological findings in serum
+Add:         S3011XA Contusion of abdominal wall, initial encounter
+Add:         S3011XD Contusion of abdominal wall, subsequent encounter
+Add:         S3011XS Contusion of abdominal wall, sequela
+Add:         S3012XA Contusion of groin, initial encounter
+Add:         S3012XD Contusion of groin, subsequent encounter
+Add:         S3012XS Contusion of groin, sequela
+Add:         S3013XA Contusion of flank (latus) region, initial encounter
+Add:         S3013XD Contusion of flank (latus) region, subsequent encounter
+Add:         S3013XS Contusion of flank (latus) region, sequela
+Delete:      S301XXA Contusion of abdominal wall, initial encounter
+Delete:      S301XXD Contusion of abdominal wall, subsequent encounter
+Delete:      S301XXS Contusion of abdominal wall, sequela
+Add:         S3081AA Abrasion of flank, initial encounter
+Add:         S3081AD Abrasion of flank, subsequent encounter
+Add:         S3081AS Abrasion of flank, sequela
+Add:         S3082AA Blister (nonthermal) of flank, initial encounter
+Add:         S3082AD Blister (nonthermal) of flank, subsequent encounter
+Add:         S3082AS Blister (nonthermal) of flank, sequela
+Add:         S3084AA External constriction of flank, initial encounter
+Add:         S3084AD External constriction of flank, subsequent encounter
+Add:         S3084AS External constriction of flank, sequela
+Add:         S3085AA Superficial foreign body of flank, initial encounter
+Add:         S3085AD Superficial foreign body of flank, subsequent encounter
+Add:         S3085AS Superficial foreign body of flank, sequela
+Add:         S3086AA Insect bite (nonvenomous) of flank, initial encounter
+Add:         S3086AD Insect bite (nonvenomous) of flank, subsequent encounter
+Add:         S3086AS Insect bite (nonvenomous) of flank, sequela
+Add:         S3087AA Other superficial bite of flank, initial encounter
+Add:         S3087AD Other superficial bite of flank, subsequent encounter
+Add:         S3087AS Other superficial bite of flank, sequela
+Add:         S309AXA Unspecified superficial injury of flank, initial encounter
+Add:         S309AXD Unspecified superficial injury of flank, subsequent encounter
+Add:         S309AXS Unspecified superficial injury of flank, sequela
+Add:         S31106A Unspecified open wound of abdominal wall, right flank without penetration into peritoneal cavity, initial encounter
+Add:         S31106D Unspecified open wound of abdominal wall, right flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31106S Unspecified open wound of abdominal wall, right flank without penetration into peritoneal cavity, sequela
+Add:         S31107A Unspecified open wound of abdominal wall, left flank without penetration into peritoneal cavity, initial encounter
+Add:         S31107D Unspecified open wound of abdominal wall, left flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31107S Unspecified open wound of abdominal wall, left flank without penetration into peritoneal cavity, sequela
+Add:         S3110AA Unspecified open wound of abdominal wall, unspecified flank without penetration into peritoneal cavity, initial encounter
+Add:         S3110AD Unspecified open wound of abdominal wall, unspecified flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S3110AS Unspecified open wound of abdominal wall, unspecified flank without penetration into peritoneal cavity, sequela
+Add:         S31116A Laceration without foreign body of abdominal wall, right flank without penetration into peritoneal cavity, initial encounter
+Add:         S31116D Laceration without foreign body of abdominal wall, right flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31116S Laceration without foreign body of abdominal wall, right flank without penetration into peritoneal cavity, sequela
+Add:         S31117A Laceration without foreign body of abdominal wall, left flank without penetration into peritoneal cavity, initial encounter
+Add:         S31117D Laceration without foreign body of abdominal wall, left flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31117S Laceration without foreign body of abdominal wall, left flank without penetration into peritoneal cavity, sequela
+Add:         S3111AA Laceration without foreign body of abdominal wall, unspecified flank without penetration into peritoneal cavity, initial encounter
+Add:         S3111AD Laceration without foreign body of abdominal wall, unspecified flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S3111AS Laceration without foreign body of abdominal wall, unspecified flank without penetration into peritoneal cavity, sequela
+Add:         S31126A Laceration with foreign body of abdominal wall, right flank without penetration into peritoneal cavity, initial encounter
+Add:         S31126D Laceration with foreign body of abdominal wall, right flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31126S Laceration with foreign body of abdominal wall, right flank without penetration into peritoneal cavity, sequela
+Add:         S31127A Laceration with foreign body of abdominal wall, left flank without penetration into peritoneal cavity, initial encounter
+Add:         S31127D Laceration with foreign body of abdominal wall, left flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31127S Laceration with foreign body of abdominal wall, left flank without penetration into peritoneal cavity, sequela
+Add:         S3112AA Laceration with foreign body of abdominal wall unspecified flank without penetration into peritoneal cavity, initial encounter
+Add:         S3112AD Laceration with foreign body of abdominal wall unspecified flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S3112AS Laceration with foreign body of abdominal wall unspecified flank without penetration into peritoneal cavity, sequela
+Add:         S31136A Puncture wound of abdominal wall without foreign body, right flank without penetration into peritoneal cavity, initial encounter
+Add:         S31136D Puncture wound of abdominal wall without foreign body, right flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31136S Puncture wound of abdominal wall without foreign body, right flank without penetration into peritoneal cavity, sequela
+Add:         S31137A Puncture wound of abdominal wall without foreign body, left flank without penetration into peritoneal cavity, initial encounter
+Add:         S31137D Puncture wound of abdominal wall without foreign body, left flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31137S Puncture wound of abdominal wall without foreign body, left flank without penetration into peritoneal cavity, sequela
+Add:         S3113AA Puncture wound of abdominal wall without foreign body, unspecified flank without penetration into peritoneal cavity, initial encounter
+Add:         S3113AD Puncture wound of abdominal wall without foreign body, unspecified flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S3113AS Puncture wound of abdominal wall without foreign body, unspecified flank without penetration into peritoneal cavity, sequela
+Add:         S31146A Puncture wound of abdominal wall with foreign body, right flank without penetration into peritoneal cavity, initial encounter
+Add:         S31146D Puncture wound of abdominal wall with foreign body, right flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31146S Puncture wound of abdominal wall with foreign body, right flank without penetration into peritoneal cavity, sequela
+Add:         S31147A Puncture wound of abdominal wall with foreign body, left flank without penetration into peritoneal cavity, initial encounter
+Add:         S31147D Puncture wound of abdominal wall with foreign body, left flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31147S Puncture wound of abdominal wall with foreign body, left flank without penetration into peritoneal cavity, sequela
+Add:         S3114AA Puncture wound of abdominal wall with foreign body, unspecified flank without penetration into peritoneal cavity, initial encounter
+Add:         S3114AD Puncture wound of abdominal wall with foreign body, unspecified flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S3114AS Puncture wound of abdominal wall with foreign body, unspecified flank without penetration into peritoneal cavity, sequela
+Add:         S31156A Open bite of abdominal wall, right flank without penetration into peritoneal cavity, initial encounter
+Add:         S31156D Open bite of abdominal wall, right flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31156S Open bite of abdominal wall, right flank without penetration into peritoneal cavity, sequela
+Add:         S31157A Open bite of abdominal wall, left flank without penetration into peritoneal cavity, initial encounter
+Add:         S31157D Open bite of abdominal wall, left flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S31157S Open bite of abdominal wall, left flank without penetration into peritoneal cavity, sequela
+Add:         S3115AA Open bite of abdominal wall, unspecified flank without penetration into peritoneal cavity, initial encounter
+Add:         S3115AD Open bite of abdominal wall, unspecified flank without penetration into peritoneal cavity, subsequent encounter
+Add:         S3115AS Open bite of abdominal wall, unspecified flank without penetration into peritoneal cavity, sequela
+Add:         S31606A Unspecified open wound of abdominal wall, right flank with penetration into peritoneal cavity, initial encounter
+Add:         S31606D Unspecified open wound of abdominal wall, right flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31606S Unspecified open wound of abdominal wall, right flank with penetration into peritoneal cavity, sequela
+Add:         S31607A Unspecified open wound of abdominal wall, left flank with penetration into peritoneal cavity, initial encounter
+Add:         S31607D Unspecified open wound of abdominal wall, left flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31607S Unspecified open wound of abdominal wall, left flank with penetration into peritoneal cavity, sequela
+Add:         S3160AA Unspecified open wound of abdominal wall, unspecified flank with penetration into peritoneal cavity, initial encounter
+Add:         S3160AD Unspecified open wound of abdominal wall, unspecified flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S3160AS Unspecified open wound of abdominal wall, unspecified flank with penetration into peritoneal cavity, sequela
+Add:         S31616A Laceration without foreign body of abdominal wall, right flank with penetration into peritoneal cavity, initial encounter
+Add:         S31616D Laceration without foreign body of abdominal wall, right flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31616S Laceration without foreign body of abdominal wall, right flank with penetration into peritoneal cavity, sequela
+Add:         S31617A Laceration without foreign body of abdominal wall, left flank with penetration into peritoneal cavity, initial encounter
+Add:         S31617D Laceration without foreign body of abdominal wall, left flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31617S Laceration without foreign body of abdominal wall, left flank with penetration into peritoneal cavity, sequela
+Add:         S3161AA Laceration without foreign body of abdominal wall, unspecified flank with penetration into peritoneal cavity, initial encounter
+Add:         S3161AD Laceration without foreign body of abdominal wall, unspecified flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S3161AS Laceration without foreign body of abdominal wall, unspecified flank with penetration into peritoneal cavity, sequela
+Add:         S31626A Laceration with foreign body of abdominal wall, right flank with penetration into peritoneal cavity, initial encounter
+Add:         S31626D Laceration with foreign body of abdominal wall, right flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31626S Laceration with foreign body of abdominal wall, right flank with penetration into peritoneal cavity, sequela
+Add:         S31627A Laceration with foreign body of abdominal wall, left flank with penetration into peritoneal cavity, initial encounter
+Add:         S31627D Laceration with foreign body of abdominal wall, left flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31627S Laceration with foreign body of abdominal wall, left flank with penetration into peritoneal cavity, sequela
+Add:         S3162AA Laceration with foreign body of abdominal wall, unspecified flank with penetration into peritoneal cavity, initial encounter
+Add:         S3162AD Laceration with foreign body of abdominal wall, unspecified flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S3162AS Laceration with foreign body of abdominal wall, unspecified flank with penetration into peritoneal cavity, sequela
+Add:         S31636A Puncture wound of abdominal wall without foreign body, right flank with penetration into peritoneal cavity, initial encounter
+Add:         S31636D Puncture wound of abdominal wall without foreign body, right flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31636S Puncture wound of abdominal wall without foreign body, right flank with penetration into peritoneal cavity, sequela
+Add:         S31637A Puncture wound of abdominal wall without foreign body, left flank with penetration into peritoneal cavity, initial encounter
+Add:         S31637D Puncture wound of abdominal wall without foreign body, left flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31637S Puncture wound of abdominal wall without foreign body, left flank with penetration into peritoneal cavity, sequela
+Add:         S3163AA Puncture wound of abdominal wall without foreign body, unspecified flank with penetration into peritoneal cavity, initial encounter
+Add:         S3163AD Puncture wound of abdominal wall without foreign body, unspecified flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S3163AS Puncture wound of abdominal wall without foreign body, unspecified flank with penetration into peritoneal cavity, sequela
+Add:         S31646A Puncture wound of abdominal wall with foreign body, right flank with penetration into peritoneal cavity, initial encounter
+Add:         S31646D Puncture wound of abdominal wall with foreign body, right flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31646S Puncture wound of abdominal wall with foreign body, right flank with penetration into peritoneal cavity, sequela
+Add:         S31647A Puncture wound of abdominal wall with foreign body, left flank with penetration into peritoneal cavity, initial encounter
+Add:         S31647D Puncture wound of abdominal wall with foreign body, left flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31647S Puncture wound of abdominal wall with foreign body, left flank with penetration into peritoneal cavity, sequela
+Add:         S3164AA Puncture wound of abdominal wall with foreign body, unspecified flank with penetration into peritoneal cavity, initial encounter
+Add:         S3164AD Puncture wound of abdominal wall with foreign body, unspecified flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S3164AS Puncture wound of abdominal wall with foreign body, unspecified flank with penetration into peritoneal cavity, sequela
+Add:         S31656A Open bite of abdominal wall, right flank with penetration into peritoneal cavity, initial encounter
+Add:         S31656D Open bite of abdominal wall, right flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31656S Open bite of abdominal wall, right flank with penetration into peritoneal cavity, sequela
+Add:         S31657A Open bite of abdominal wall, left flank with penetration into peritoneal cavity, initial encounter
+Add:         S31657D Open bite of abdominal wall, left flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S31657S Open bite of abdominal wall, left flank with penetration into peritoneal cavity, sequela
+Add:         S3165AA Open bite of abdominal wall, unspecified flank with penetration into peritoneal cavity, initial encounter
+Add:         S3165AD Open bite of abdominal wall, unspecified flank with penetration into peritoneal cavity, subsequent encounter
+Add:         S3165AS Open bite of abdominal wall, unspecified flank with penetration into peritoneal cavity, sequela
+Revise from: S6290XA Unspecified fracture of unspecified wrist and hand, initial encounter for closed fracture
+Revise to:   S6290XA Unspecified fracture of unspecified hand, initial encounter for closed fracture
+Revise from: S6290XB Unspecified fracture of unspecified wrist and hand, initial encounter for open fracture
+Revise to:   S6290XB Unspecified fracture of unspecified hand, initial encounter for open fracture
+Revise from: S6290XD Unspecified fracture of unspecified wrist and hand, subsequent encounter for fracture with routine healing
+Revise to:   S6290XD Unspecified fracture of unspecified hand, subsequent encounter for fracture with routine healing
+Revise from: S6290XG Unspecified fracture of unspecified wrist and hand, subsequent encounter for fracture with delayed healing
+Revise to:   S6290XG Unspecified fracture of unspecified hand, subsequent encounter for fracture with delayed healing
+Revise from: S6290XK Unspecified fracture of unspecified wrist and hand, subsequent encounter for fracture with nonunion
+Revise to:   S6290XK Unspecified fracture of unspecified hand, subsequent encounter for fracture with nonunion
+Revise from: S6290XP Unspecified fracture of unspecified wrist and hand, subsequent encounter for fracture with malunion
+Revise to:   S6290XP Unspecified fracture of unspecified hand, subsequent encounter for fracture with malunion
+Revise from: S6290XS Unspecified fracture of unspecified wrist and hand, sequela
+Revise to:   S6290XS Unspecified fracture of unspecified hand, sequela
+Revise from: S6291XA Unspecified fracture of right wrist and hand, initial encounter for closed fracture
+Revise to:   S6291XA Unspecified fracture of right hand, initial encounter for closed fracture
+Revise from: S6291XB Unspecified fracture of right wrist and hand, initial encounter for open fracture
+Revise to:   S6291XB Unspecified fracture of right hand, initial encounter for open fracture
+Revise from: S6291XD Unspecified fracture of right wrist and hand, subsequent encounter for fracture with routine healing
+Revise to:   S6291XD Unspecified fracture of right hand, subsequent encounter for fracture with routine healing
+Revise from: S6291XG Unspecified fracture of right wrist and hand, subsequent encounter for fracture with delayed healing
+Revise to:   S6291XG Unspecified fracture of right hand, subsequent encounter for fracture with delayed healing
+Revise from: S6291XK Unspecified fracture of right wrist and hand, subsequent encounter for fracture with nonunion
+Revise to:   S6291XK Unspecified fracture of right hand, subsequent encounter for fracture with nonunion
+Revise from: S6291XP Unspecified fracture of right wrist and hand, subsequent encounter for fracture with malunion
+Revise to:   S6291XP Unspecified fracture of right hand, subsequent encounter for fracture with malunion
+Revise from: S6291XS Unspecified fracture of right wrist and hand, sequela
+Revise to:   S6291XS Unspecified fracture of right hand, sequela
+Revise from: S6292XA Unspecified fracture of left wrist and hand, initial encounter for closed fracture
+Revise to:   S6292XA Unspecified fracture of left hand, initial encounter for closed fracture
+Revise from: S6292XB Unspecified fracture of left wrist and hand, initial encounter for open fracture
+Revise to:   S6292XB Unspecified fracture of left hand, initial encounter for open fracture
+Revise from: S6292XD Unspecified fracture of left wrist and hand, subsequent encounter for fracture with routine healing
+Revise to:   S6292XD Unspecified fracture of left hand, subsequent encounter for fracture with routine healing
+Revise from: S6292XG Unspecified fracture of left wrist and hand, subsequent encounter for fracture with delayed healing
+Revise to:   S6292XG Unspecified fracture of left hand, subsequent encounter for fracture with delayed healing
+Revise from: S6292XK Unspecified fracture of left wrist and hand, subsequent encounter for fracture with nonunion
+Revise to:   S6292XK Unspecified fracture of left hand, subsequent encounter for fracture with nonunion
+Revise from: S6292XP Unspecified fracture of left wrist and hand, subsequent encounter for fracture with malunion
+Revise to:   S6292XP Unspecified fracture of left hand, subsequent encounter for fracture with malunion
+Revise from: S6292XS Unspecified fracture of left wrist and hand, sequela
+Revise to:   S6292XS Unspecified fracture of left hand, sequela
+Revise from: S7421XA Injury of cutaneous sensory nerve at hip and high level, right leg, initial encounter
+Revise to:   S7421XA Injury of cutaneous sensory nerve at hip and thigh level, right leg, initial encounter
+Revise from: S7421XD Injury of cutaneous sensory nerve at hip and high level, right leg, subsequent encounter
+Revise to:   S7421XD Injury of cutaneous sensory nerve at hip and thigh level, right leg, subsequent encounter
+Revise from: S7421XS Injury of cutaneous sensory nerve at hip and high level, right leg, sequela
+Revise to:   S7421XS Injury of cutaneous sensory nerve at hip and thigh level, right leg, sequela
+Add:         T36AX1A Poisoning by fluoroquinolone antibiotics, accidental (unintentional), initial encounter
+Add:         T36AX1D Poisoning by fluoroquinolone antibiotics, accidental (unintentional), subsequent encounter
+Add:         T36AX1S Poisoning by fluoroquinolone antibiotics, accidental (unintentional), sequela
+Add:         T36AX2A Poisoning by fluoroquinolone antibiotics, intentional self-harm, initial encounter
+Add:         T36AX2D Poisoning by fluoroquinolone antibiotics, intentional self-harm, subsequent encounter
+Add:         T36AX2S Poisoning by fluoroquinolone antibiotics, intentional self-harm, sequela
+Add:         T36AX3A Poisoning by fluoroquinolone antibiotics, assault, initial encounter
+Add:         T36AX3D Poisoning by fluoroquinolone antibiotics, assault, subsequent encounter
+Add:         T36AX3S Poisoning by fluoroquinolone antibiotics, assault, sequela
+Add:         T36AX4A Poisoning by fluoroquinolone antibiotics, undetermined, initial encounter
+Add:         T36AX4D Poisoning by fluoroquinolone antibiotics, undetermined, subsequent encounter
+Add:         T36AX4S Poisoning by fluoroquinolone antibiotics, undetermined, sequela
+Add:         T36AX5A Adverse effect of fluoroquinolone antibiotics, initial encounter
+Add:         T36AX5D Adverse effect of fluoroquinolone antibiotics, subsequent encounter
+Add:         T36AX5S Adverse effect of fluoroquinolone antibiotics, sequela
+Add:         T36AX6A Underdosing of fluoroquinolone antibiotics, initial encounter
+Add:         T36AX6D Underdosing of fluoroquinolone antibiotics, subsequent encounter
+Add:         T36AX6S Underdosing of fluoroquinolone antibiotics, sequela
+Add:         T65841A Toxic effect of xylazine, accidental (unintentional), initial encounter
+Add:         T65841D Toxic effect of xylazine, accidental (unintentional), subsequent encounter
+Add:         T65841S Toxic effect of xylazine, accidental (unintentional), sequela
+Add:         T65842A Toxic effect of xylazine, intentional self-harm, initial encounter
+Add:         T65842D Toxic effect of xylazine, intentional self-harm, subsequent encounter
+Add:         T65842S Toxic effect of xylazine, intentional self-harm, sequela
+Add:         T65843A Toxic effect of xylazine, assault, initial encounter
+Add:         T65843D Toxic effect of xylazine, assault, subsequent encounter
+Add:         T65843S Toxic effect of xylazine, assault, sequela
+Add:         T65844A Toxic effect of xylazine, undetermined, initial encounter
+Add:         T65844D Toxic effect of xylazine, undetermined, subsequent encounter
+Add:         T65844S Toxic effect of xylazine, undetermined, sequela
+Add:         T75830A Gulf war illness, initial encounter
+Add:         T75830D Gulf war illness, subsequent encounter
+Add:         T75830S Gulf war illness, sequela
+Add:         T75838A Effects of other war theater, initial encounter
+Add:         T75838D Effects of other war theater, subsequent encounter
+Add:         T75838S Effects of other war theater, sequela
+Add:         T78070A Anaphylactic reaction due to milk and dairy products with tolerance to baked milk, initial encounter
+Add:         T78070D Anaphylactic reaction due to milk and dairy products with tolerance to baked milk, subsequent encounter
+Add:         T78070S Anaphylactic reaction due to milk and dairy products with tolerance to baked milk, sequela
+Add:         T78071A Anaphylactic reaction due to milk and dairy products with reactivity to baked milk, initial encounter
+Add:         T78071D Anaphylactic reaction due to milk and dairy products with reactivity to baked milk, subsequent encounter
+Add:         T78071S Anaphylactic reaction due to milk and dairy products with reactivity to baked milk, sequela
+Add:         T78079A Anaphylactic reaction due to milk and dairy products, unspecified, initial encounter
+Add:         T78079D Anaphylactic reaction due to milk and dairy products, unspecified, subsequent encounter
+Add:         T78079S Anaphylactic reaction due to milk and dairy products, unspecified, sequela
+Delete:      T7807XA Anaphylactic reaction due to milk and dairy products, initial encounter
+Delete:      T7807XD Anaphylactic reaction due to milk and dairy products, subsequent encounter
+Delete:      T7807XS Anaphylactic reaction due to milk and dairy products, sequela
+Add:         T78080A Anaphylactic reaction due to egg with tolerance to baked egg, initial encounter
+Add:         T78080D Anaphylactic reaction due to egg with tolerance to baked egg, subsequent encounter
+Add:         T78080S Anaphylactic reaction due to egg with tolerance to baked egg, sequela
+Add:         T78081A Anaphylactic reaction due to egg with reactivity to baked egg, initial encounter
+Add:         T78081D Anaphylactic reaction due to egg with reactivity to baked egg, subsequent encounter
+Add:         T78081S Anaphylactic reaction due to egg with reactivity to baked egg, sequela
+Add:         T78089A Anaphylactic reaction due to eggs, unspecified, initial encounter
+Add:         T78089D Anaphylactic reaction due to eggs, unspecified, subsequent encounter
+Add:         T78089S Anaphylactic reaction due to eggs, unspecified, sequela
+Delete:      T7808XA Anaphylactic reaction due to eggs, initial encounter
+Delete:      T7808XD Anaphylactic reaction due to eggs, subsequent encounter
+Delete:      T7808XS Anaphylactic reaction due to eggs, sequela
+Add:         T78110A Other adverse food reactions due to milk and dairy products with tolerance to baked milk, initial encounter
+Add:         T78110D Other adverse food reactions due to milk and dairy products with tolerance to baked milk, subsequent encounter
+Add:         T78110S Other adverse food reactions due to milk and dairy products with tolerance to baked milk, sequela
+Add:         T78111A Other adverse food reaction due to milk and dairy products with reactivity to baked milk, initial encounter
+Add:         T78111D Other adverse food reaction due to milk and dairy products with reactivity to baked milk, subsequent encounter
+Add:         T78111S Other adverse food reaction due to milk and dairy products with reactivity to baked milk, sequela
+Add:         T78119A Other adverse food reaction due to milk and dairy products with baked milk tolerance/reactivity, unspecified, initial encounter
+Add:         T78119D Other adverse food reaction due to milk and dairy products with baked milk tolerance/reactivity, unspecified, subsequent encounter
+Add:         T78119S Other adverse food reaction due to milk and dairy products with baked milk tolerance/reactivity, unspecified, sequela
+Add:         T78120A Other adverse food reaction due to egg with tolerance to baked egg, initial encounter
+Add:         T78120D Other adverse food reaction due to egg with tolerance to baked egg, subsequent encounter
+Add:         T78120S Other adverse food reaction due to egg with tolerance to baked egg, sequela
+Add:         T78121A Other adverse food reaction due to egg with reactivity to baked egg, initial encounter
+Add:         T78121D Other adverse food reaction due to egg with reactivity to baked egg, subsequent encounter
+Add:         T78121S Other adverse food reaction due to egg with reactivity to baked egg, sequela
+Add:         T78129A Other adverse food reaction due to egg with baked egg tolerance/reactivity, unspecified, initial encounter
+Add:         T78129D Other adverse food reaction due to egg with baked egg tolerance/reactivity, unspecified, subsequent encounter
+Add:         T78129S Other adverse food reaction due to egg with baked egg tolerance/reactivity, unspecified, sequela
+Add:         T7819XA Other adverse food reactions, not elsewhere classified, initial encounter
+Add:         T7819XD Other adverse food reactions, not elsewhere classified, subsequent encounter
+Add:         T7819XS Other adverse food reactions, not elsewhere classified, sequela
+Delete:      T781XXA Other adverse food reactions, not elsewhere classified, initial encounter
+Delete:      T781XXD Other adverse food reactions, not elsewhere classified, subsequent encounter
+Delete:      T781XXS Other adverse food reactions, not elsewhere classified, sequela
+Add:         W44H9XA Other sharp object entering into or through a natural orifice, initial encounter
+Add:         W44H9XD Other sharp object entering into or through a natural orifice, subsequent encounter
+Add:         W44H9XS Other sharp object entering into or through a natural orifice, sequela
+Add:         W453XXA Fishing hook entering through skin, initial encounter
+Add:         W453XXD Fishing hook entering through skin, subsequent encounter
+Add:         W453XXS Fishing hook entering through skin, sequela
+Revise from: Y07435  Stepbrother, perpetrator or maltreatment and neglect
+Revise to:   Y07435  Stepbrother, perpetrator of maltreatment and neglect
+Add:         Y36A1XA Low level blast overpressure in war operations, initial encounter
+Add:         Y36A1XD Low level blast overpressure in war operations, subsequent encounter
+Add:         Y36A1XS Low level blast overpressure in war operations, sequela
+Add:         Y36A2XA High level blast overpressure in war operations, initial encounter
+Add:         Y36A2XD High level blast overpressure in war operations, subsequent encounter
+Add:         Y36A2XS High level blast overpressure in war operations, sequela
+Add:         Y37A1XA Low level blast overpressure in military operations, initial encounter
+Add:         Y37A1XD Low level blast overpressure in military operations, subsequent encounter
+Add:         Y37A1XS Low level blast overpressure in military operations, sequela
+Add:         Y37A2XA High level blast overpressure in military operations, initial encounter
+Add:         Y37A2XD High level blast overpressure in military operations, subsequent encounter
+Add:         Y37A2XS High level blast overpressure in military operations, sequela
+Add:         Y93L1   Activity, splitting wood
+Add:         Y93L9   Activity, other outdoor activity
+Add:         Z1505   Genetic susceptibility to malignant neoplasm of fallopian tube(s)
+Add:         Z15060  Genetic susceptibility to colorectal cancer
+Add:         Z15068  Genetic susceptibility to other malignant neoplasm of digestive system
+Add:         Z1507   Genetic susceptibility to malignant neoplasm of urinary tract
+Add:         Z153    Genetic susceptibility to kidney disease
+Delete:      Z408    Encounter for other prophylactic surgery
+Add:         Z4081   Encounter for prophylactic surgery for removal of ovary(s) for persons without known genetic/familial risk factors
+Add:         Z4082   Encounter for prophylactic surgery for removal of fallopian tube(s) for persons without known genetic/familial risk factors
+Add:         Z4089   Encounter for other prophylactic surgery
+Delete:      Z5986   Financial insecurity
+Add:         Z59861  Financial insecurity, difficulty paying for utilities
+Add:         Z59868  Other specified financial insecurity
+Add:         Z59869  Financial insecurity, unspecified
+Add:         Z7731   Contact with and (suspected) exposure to Gulf War theater
+Add:         Z7739   Contact with and (suspected) exposure to other war theater
+Add:         Z8044   Family history of malignant neoplasm of fallopian tube(s)
+Revise from: Z83718  Other family history of colon polyps
+Revise to:   Z83718  Family history of other colon polyps
+Delete:      Z841    Family history of disorders of kidney and ureter
+Add:         Z8411   Family history of APOL1-mediated kidney disease [AMKD]
+Add:         Z8419   Family history of other disorders of kidney and ureter
+Add:         Z84A    Family history of exposure to diethylstilbestrol
+Add:         Z854A   Personal history of malignant neoplasm of fallopian tube(s)
+Add:         Z8600A  Personal history of in-situ neoplasm of the fallopian tube(s)
+Delete:      Z91011  Allergy to milk products
+Add:         Z910110 Allergy to milk products, unspecified
+Add:         Z910111 Allergy to milk products with tolerance to baked milk
+Add:         Z910112 Allergy to milk products with reactivity to baked milk
+Delete:      Z91012  Allergy to eggs
+Add:         Z910120 Allergy to eggs, unspecified
+Add:         Z910121 Allergy to eggs with tolerance to baked egg
+Add:         Z910122 Allergy to eggs with reactivity to baked egg
+Add:         Z91B    Personal risk factor of exposure to diethylstilbestrol
+
+Codes
+  74260 codes in icd10cm_order_2025.txt
+  74719 codes in icd10cm_order_2026.txt
+    487 additions
+     28 deletions
+     38 revisions

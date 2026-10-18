@@ -1,0 +1,16 @@
+# Subconcept-free mode vs xplus-v2c-base — pooled dev+test, 20 seeds, fixed folds
+
+Non-inferiority: each system's pooled acc and the pooled min >= base - 1.0 pt, and broken - fixed <= sqrt(fixed + broken) per system. `*_const` rows still read the constant tag_compat (diagnostic only).
+
+| step | system | name | status | pool acc | Δacc | unseen | Δunseen | ceiling | dev | test | pool min | Δmin | fixed | broken | note |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| none_const | ICD | CE without subconcept; tag_compat constant (CE change alone) | ACCEPT | 0.749 | -0.002 | 0.634 | -0.010 | 0.943 | 0.758 | 0.741 | 0.677 | +0.000 | 3 | 4 | top SNOMED pick non-diag tag 0.009 (base 0.006); gate calls 202 (empty cache, 202 distinct prompts so far) |
+| none_const | SNOMED | CE without subconcept; tag_compat constant (CE change alone) | ACCEPT | 0.677 | +0.000 | 0.594 | +0.011 | 0.896 | 0.643 | 0.709 | 0.677 | +0.000 | 10 | 10 | top SNOMED pick non-diag tag 0.009 (base 0.006); gate calls 202 (empty cache, 202 distinct prompts so far) |
+| none_drop | ICD | SF: CE without subconcept; tag_compat dropped | REJECT | 0.743 | -0.009 | 0.634 | -0.010 | 0.943 | 0.744 | 0.741 | 0.673 | -0.004 | 3 | 7 | top SNOMED pick non-diag tag 0.006 (base 0.006); gate calls 203 (empty cache, 291 distinct prompts so far) |
+| none_drop | SNOMED | SF: CE without subconcept; tag_compat dropped | REJECT | 0.673 | -0.004 | 0.590 | +0.007 | 0.896 | 0.639 | 0.705 | 0.673 | -0.004 | 9 | 11 | top SNOMED pick non-diag tag 0.006 (base 0.006); gate calls 203 (empty cache, 291 distinct prompts so far) |
+| none_drop_f | ICD | SF: CE without subconcept; tag_compat dropped; SNOMED tag filter | REJECT | 0.743 | -0.009 | 0.634 | -0.010 | 0.943 | 0.744 | 0.741 | 0.671 | -0.006 | 3 | 7 | top SNOMED pick non-diag tag 0.000 (base 0.006); gate calls 203 (empty cache, 301 distinct prompts so far) |
+| none_drop_f | SNOMED | SF: CE without subconcept; tag_compat dropped; SNOMED tag filter | REJECT | 0.671 | -0.006 | 0.586 | +0.004 | 0.895 | 0.635 | 0.705 | 0.671 | -0.006 | 9 | 12 | top SNOMED pick non-diag tag 0.000 (base 0.006); gate calls 203 (empty cache, 301 distinct prompts so far) |
+| none_dtag | ICD | SF: CE without subconcept; tag_compat -> cand_is_diag_tag | ACCEPT | 0.749 | -0.002 | 0.634 | -0.010 | 0.943 | 0.753 | 0.745 | 0.675 | -0.002 | 4 | 5 | top SNOMED pick non-diag tag 0.006 (base 0.006); gate calls 202 (empty cache, 345 distinct prompts so far) |
+| none_dtag | SNOMED | SF: CE without subconcept; tag_compat -> cand_is_diag_tag | ACCEPT | 0.675 | -0.002 | 0.597 | +0.014 | 0.896 | 0.639 | 0.709 | 0.675 | -0.002 | 8 | 9 | top SNOMED pick non-diag tag 0.006 (base 0.006); gate calls 202 (empty cache, 345 distinct prompts so far) |
+| none_dtag_f | ICD | SF: CE without subconcept; tag_compat -> cand_is_diag_tag; SNOMED tag filter | ACCEPT | 0.749 | -0.002 | 0.634 | -0.010 | 0.943 | 0.753 | 0.745 | 0.673 | -0.004 | 4 | 5 | top SNOMED pick non-diag tag 0.000 (base 0.006); gate calls 201 (empty cache, 349 distinct prompts so far) |
+| none_dtag_f | SNOMED | SF: CE without subconcept; tag_compat -> cand_is_diag_tag; SNOMED tag filter | ACCEPT | 0.673 | -0.004 | 0.594 | +0.011 | 0.895 | 0.635 | 0.709 | 0.673 | -0.004 | 8 | 10 | top SNOMED pick non-diag tag 0.000 (base 0.006); gate calls 201 (empty cache, 349 distinct prompts so far) |

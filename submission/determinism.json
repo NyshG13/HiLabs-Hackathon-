@@ -1,0 +1,44 @@
+{
+ "rows": 50,
+ "byte_identical": true,
+ "runs": [
+  {
+   "terms": 50,
+   "seconds": 261.1,
+   "ms_per_term": 5222.0,
+   "retrieval_p50_p95_ms": [
+    1096.8,
+    1865.6
+   ],
+   "device": "cuda",
+   "recipe": "none_dtag",
+   "llm": true,
+   "memory": [
+    "train",
+    "dev",
+    "test"
+   ],
+   "routed_to_gate": 11,
+   "peak_gpu_mb": 3084
+  },
+  {
+   "terms": 50,
+   "seconds": 333.9,
+   "ms_per_term": 6678.2,
+   "retrieval_p50_p95_ms": [
+    1089.3,
+    2419.8
+   ],
+   "device": "cuda",
+   "recipe": "none_dtag",
+   "llm": true,
+   "memory": [
+    "train",
+    "dev",
+    "test"
+   ],
+   "routed_to_gate": 11,
+   "peak_gpu_mb": 3084
+  }
+ ]
+}
