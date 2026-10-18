@@ -8,8 +8,11 @@ TermMap-X+ maps a clinical term extracted from a chart, read together with the c
 
 | | ICD-10-CM | SNOMED CT |
 |---|---|---|
-| **Blind internal test, scored once** (243 / 275 diagnosis rows) | **72.4%** | **70.5%** |
+| **Final model, held-out replay** (components chosen on 60% of chunks, scored on the other 40%) | **68.7%** | **68.9%** |
 | Final model, out-of-fold (470 / 541 rows, 5 chunk-grouped folds) | 74.9% | 67.5% |
+| Blind internal test, scored once, **v1 build** (243 / 275 diagnosis rows) | 72.4% | 70.5% |
+
+**Expect about 70% on new data.** The blind test was scored once on the v1 build (X + ICD tree/siblings + lexical traps). The components added after that were selected on pooled dev+test, so the final model has no untouched test score; the held-out replay is its most conservative estimate. See [Results](#5-results).
 
 Contents:
 1. [How it works](#1-how-it-works-the-pipeline)
@@ -71,7 +74,7 @@ flowchart TD
 |---|---|---|
 | **1 · Retrieve** | recall: get the right code into a short list | gold code in the pool: **94.3% / 89.6%**; top-1 of the fusion alone: 41.5% / 48.2% |
 | **2 · Score** | describe every candidate with many signals | best single scorer (context cross-encoder): **52.3% / 55.8%** |
-| **3 · Decide** | combine the signals into one pick per system | final model: **74.9% / 67.5%** out-of-fold; **72.4% / 70.5%** on the blind test |
+| **3 · Decide** | combine the signals into one pick per system | final model: **74.9% / 67.5%** out-of-fold; **68.7% / 68.9%** held-out replay |
 | Qwen2.5 gate | second opinion on unsure SNOMED picks only | called on 37% of SNOMED rows; adds about 2 points |
 | Output | one valid code per system + a confidence | always a code from the supplied dictionaries |
 
@@ -199,10 +202,11 @@ chronickidney disease stag 3,"assessment: chronickidney disease stag 3, egfr 45.
 
 | measure | ICD-10-CM | SNOMED CT |
 |---|---|---|
-| **Exact match, blind test** | **72.4%** [66.5, 77.7] | **70.5%** [64.9, 75.6] |
-| **Long tail: unseen-code accuracy**, blind test | 61.5% [48.0, 73.5] (n=52) | **63.2%** [54.9, 70.9] (n=136) |
+| **Exact match, held-out replay** (most conservative) | **68.7%** | **68.9%** |
+| Exact match, blind test (**v1 build**, scored once) | 72.4% [66.5, 77.7] | 70.5% [64.9, 75.6] |
+| **Long tail: unseen-code accuracy**, blind test (v1 build) | 61.5% [48.0, 73.5] (n=52) | **63.2%** [54.9, 70.9] (n=136) |
 | **Long tail: unseen-code accuracy**, out-of-fold | 63.4% [53.6, 72.1] (n=101) | **59.7%** [53.9, 65.3] (n=278) |
-| **Partial credit: right 3-character category** | **81.5%** blind · 81.7% out-of-fold | – |
+| **Partial credit: right 3-character category** | **81.5%** blind (v1) · 81.7% out-of-fold | – |
 | **Abstention: auto-code coverage at 90% precision** | **60%** of terms (`confidence_icd ≥ 0.76`) | **50%** of terms (`confidence_snomed ≥ 0.75`) |
 | **LLM gate: share of rows sent to Qwen2.5** | 0% (no gate for ICD) | **37%** (202 / 541 out-of-fold) |
 | **Run command** | `python predict.py --input <evaluation_file.csv> --output predictions.csv` | |
@@ -215,23 +219,24 @@ Details for each row follow.
 Unless stated otherwise, all numbers are top-1 exact match on **diagnosis rows**, with 95% Wilson intervals.
 
 **Headline:**
-- The **blind internal test** was scored once, while the split was unseen: 243 ICD and 275 SNOMED rows, grouped by chunk.
+- The **blind internal test** was scored once, while the split was unseen: 243 ICD and 275 SNOMED rows, grouped by chunk. That run used the **v1 build** (X + ICD tree/siblings + lexical traps, 5-seed stacker).
+- Everything added after v1 (Qwen3-Reranker, convention kNN, 20 seeds, the subconcept-free path) was selected on pooled dev+test, so the test split is no longer blind for the final model.
 - The **out-of-fold** numbers pool dev and test (470 / 541 rows) and use 5 chunk-grouped folds with the 20-seed stacker.
 
 | | ICD-10-CM | SNOMED CT |
 |---|---|---|
-| **Exact match: blind test** | **72.4%** [66.5, 77.7] | **70.5%** [64.9, 75.6] |
+| Exact match: blind test (v1 build) | 72.4% [66.5, 77.7] | 70.5% [64.9, 75.6] |
 | Exact match: final model, out-of-fold | 74.9% | 67.5% |
-| Held-out replay of our component selection (chosen on 60% of chunks, scored on 40%) | 68.7% | 68.9% |
+| **Held-out replay of our component selection** (chosen on 60% of chunks, scored on 40%) | **68.7%** | **68.9%** |
 | Re-drawn folds (3 new chunk-grouped 5-fold splits, stacker refit, no gate) | 71.3–73.0% | 64.7–65.8% |
 
-The out-of-fold rows were also used to choose components, so the held-out replay is our most conservative estimate. **Expect about 70% on new data.**
+The out-of-fold rows were also used to choose components, so the held-out replay is our most conservative estimate. **Expect about 70% on new data.** With 243–541 rows per system, differences under about 3 points are within noise; most components added after v1 gain 1–2 points each and should be read as small, not certain.
 
 **Long tail (codes never seen in training).** A code is *unseen* when it is not the gold code of any diagnosis row in the training split.
 
 | unseen-code accuracy | ICD-10-CM | SNOMED CT |
 |---|---|---|
-| Blind test | 61.5% [48.0, 73.5] (n=52) | **63.2%** [54.9, 70.9] (n=136) |
+| Blind test (v1 build) | 61.5% [48.0, 73.5] (n=52) | **63.2%** [54.9, 70.9] (n=136) |
 | Out-of-fold: X+ v2 reference → final model | 59.4% → 63.4% [53.6, 72.1] (n=101) | 59.0% → **59.7%** [53.9, 65.3] (n=278) |
 
 Half of all SNOMED test terms have a gold code that never occurs in training, and the engine still gets about 60% of them right. For SNOMED, the convention-kNN vote alone would get 31.8% [28.0, 35.8] overall.
@@ -240,7 +245,7 @@ Half of all SNOMED test terms have a gold code that never occurs in training, an
 
 | | exact code | right 3-character category |
 |---|---|---|
-| Blind test | 72.4% | **81.5%** [76.1, 85.9] |
+| Blind test (v1 build) | 72.4% | **81.5%** [76.1, 85.9] |
 | Out-of-fold | 74.9% | **81.7%** [78.0, 84.9] |
 
 **Abstention: auto-code coverage at 90% precision.** These use the engine's own `confidence_*` columns, out-of-fold.
@@ -280,7 +285,7 @@ At chart volume, a server GPU would cut latency several-fold. The CPU-only fallb
 
 ## 6. Reproducing the results
 
-**a. Score the submitted evaluation predictions** (blind test → 72.4% / 70.5%):
+**a. Score the submitted evaluation predictions** (blind test, v1 build → 72.4% / 70.5%):
 
 ```bash
 python score.py --pred submission/evaluation_predictions.csv
@@ -297,7 +302,7 @@ SNOMEDCT_US  exact      70.5% [64.9, 75.6] (n=275)
 ```
 
 [`submission/evaluation_predictions.csv`](submission/evaluation_predictions.csv) holds the predictions on the evaluation set. No separate evaluation file was provided, so this is our internal **blind test split**: 289 diagnosis terms, never used for training or selection before it was scored once. The columns are `chunk_text, clinical_entity, icd10cm_code, snomed_code`.
-- 518 of the 578 codes come from the blind run (`source_* = blind_v1`).
+- 518 of the 578 codes come from the blind run of the v1 build (`source_* = blind_v1`), scored once before the later components were added.
 - The other 60 have no gold label for that system, so the blind run did not predict them. The final engine fills them in for completeness (`final_model_no_gold`), and they are not scored.
 
 **b. Run the final engine on the same input:**
@@ -309,7 +314,7 @@ python score.py --pred out.csv
 
 `out.csv` matches [`submission/reference_predictions.csv`](submission/reference_predictions.csv). A fresh GPU run matched 989/989 SNOMED codes and 986/989 ICD codes; the 3 differences are near-ties that flip with GPU half-precision rounding. Two fresh runs on the same input are byte-identical ([`submission/determinism.json`](submission/determinism.json)).
 
-> **The score of step b (~98% / ~91%) is not an accuracy.** The final engine uses all labelled rows, including this split, as memory and stacker training data, so it has seen these answers. The valid numbers are the blind ones from step a.
+> **The score of step b (~98% / ~91%) is not an accuracy.** The final engine uses all labelled rows, including this split, as memory and stacker training data, so it has seen these answers. The valid numbers are the blind v1 numbers from step a and the held-out replay in [Results](#5-results).
 
 **c. Out-of-fold and ablation numbers** come from the development ledgers in [`results/`](results/): [`ledger_sf.md`](results/ledger_sf.md) for the final build and [`X_PLUS_SUMMARY.md`](results/X_PLUS_SUMMARY.md) for the history. Every change was kept only if it passed a pre-declared rule:
 - accuracy goes up;
