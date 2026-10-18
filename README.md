@@ -23,7 +23,6 @@ Contents:
 9. [Repository layout](#9-repository-layout)
 10. [Security and data](#10-security-and-data)
 
-**Demo video:** link to be added.
 
 ---
 
