@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050507">
+<title>Lab — TermMap-X</title>
+<meta name="description" content="One clinical term in, one ICD-10-CM code and one SNOMED CT concept out. Calibrated, local, always a legal code.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='11' cy='16' r='7' fill='%230a84ff'/%3E%3Ccircle cx='21' cy='16' r='7' fill='%23bf5af2' fill-opacity='.85'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Primary">
+  <a class="brand" href="index.html">TermMap<i>-X</i></a>
+  <a href="lab.html" class="hide-s" aria-current="page">Lab</a><a href="index.html#how" class="hide-s">How it thinks</a><a href="results.html" class="hide-s">Results</a>
+  <a href="lab.html" class="cta" data-magnet>Try it</a>
+</nav>
+
+<main>
+  <div class="page-head"><div class="wrap"><div class="kicker reveal">The lab</div><h2 class="reveal">Map a term. <em>Or a whole file.</em></h2><p class="sub reveal">Type a term and watch it think, or upload a CSV of <code style="font:500 .85em var(--mono)">chunk_id, clinical_entity</code> rows and download <code style="font:500 .85em var(--mono)">predictions.csv</code>.</p></div></div>
+  <section id="lab" class="after-head">
+    <div class="wrap">
+
+      <div class="seg reveal" role="tablist" aria-label="Input mode">
+        <button role="tab" id="tabSingle" aria-selected="true" aria-controls="paneSingle">Single term</button>
+        <button role="tab" id="tabBatch" aria-selected="false" aria-controls="paneBatch">Upload CSV</button>
+        <i class="seg-thumb" aria-hidden="true"></i>
+      </div>
+      <div id="paneSingle">
+      <div class="lab-grid">
+        <div class="glass panel reveal" id="inputPanel">
+          <div class="panel-head"><h3>Input</h3><span class="flag" id="srcFlag" hidden></span></div>
+          <div class="chip-row" id="chips" role="group" aria-label="Hard cases"></div>
+          <label class="f" for="term">Clinical entity</label>
+          <input class="field-in" id="term" autocomplete="off" spellcheck="false" placeholder="e.g. chronickidney disease stag 3" maxlength="300">
+          <label class="f" for="ctx">Chunk context <span style="text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></label>
+          <textarea class="field-in" id="ctx" spellcheck="false" placeholder="Assessment: …" maxlength="2000"></textarea>
+          <div class="run">
+            <button class="btn primary" id="run" data-magnet>Map term <kbd>⌘ ↵</kbd></button>
+            <span class="note" id="runNote"></span>
+          </div>
+
+          <label class="f" style="margin-top:30px">Pipeline</label>
+          <ol class="rail" id="rail"></ol>
+        </div>
+
+        <div class="results reveal" id="results" style="--d:120ms">
+          <article class="code-card ghosted" data-sys="icd" id="cardIcd" tabindex="0" aria-label="ICD-10-CM result">
+            <div class="sys"><span>ICD-10-CM</span><span class="flag" hidden>ABSTAIN</span></div>
+            <div class="code">I10</div>
+            <div class="name">Waiting for a term…</div>
+            <div class="meta"><div class="ring na"><svg viewBox="0 0 54 54"><circle class="bg" cx="27" cy="27" r="22"/><circle class="fg" cx="27" cy="27" r="22"/></svg><b>—</b></div><div class="alts"></div></div>
+          </article>
+          <article class="code-card ghosted" data-sys="snomed" id="cardSn" tabindex="0" aria-label="SNOMED CT result">
+            <div class="sys"><span>SNOMED CT</span><span class="flag" hidden>ABSTAIN</span></div>
+            <div class="code">38341003</div>
+            <div class="name">Waiting for a term…</div>
+            <div class="meta"><div class="ring na"><svg viewBox="0 0 54 54"><circle class="bg" cx="27" cy="27" r="22"/><circle class="fg" cx="27" cy="27" r="22"/></svg><b>—</b></div><div class="alts"></div></div>
+          </article>
+          <p class="hintline" id="hintline">Drag a card · release with momentum · fling up to copy</p>
+        </div>
+      </div>
+      </div><!-- /paneSingle -->
+
+      <div id="paneBatch" hidden>
+        <div class="glass drop reveal" id="drop" tabindex="0" role="button" aria-label="Upload a CSV file">
+          <input type="file" id="file" accept=".csv,text/csv,text/plain" hidden>
+          <div class="drop-ic" aria-hidden="true">⇪</div>
+          <h3>Drop a CSV here</h3>
+          <p>Columns: <code>chunk_id</code>, <code>clinical_entity</code> (or <code>entity</code>), <code>chunk_text</code> <span>(optional, strongly recommended)</span>. Everything else is ignored. Your file never leaves this machine.</p>
+          <div class="drop-actions">
+            <button class="btn primary" id="pick" data-magnet>Choose file</button>
+            <button class="btn ghost" id="example" data-magnet>Use the hard-case example</button>
+            <button class="btn ghost" id="template" data-magnet>Template</button>
+          </div>
+        </div>
+
+        <div class="glass panel batch-panel" id="batchPanel" hidden>
+          <div class="panel-head">
+            <div><h3 id="fileName">file.csv</h3><div class="note" id="fileMeta"></div></div>
+            <span class="flag" id="batchFlag" hidden></span>
+          </div>
+          <div class="warns" id="warns"></div>
+          <div class="run">
+            <button class="btn primary" id="runBatch" data-magnet>Map all rows</button>
+            <button class="btn ghost" id="stopBatch" hidden>Stop</button>
+            <button class="btn ghost" id="dlSubmit" disabled title="chunk_id, clinical_entity, icd10cm_code, snomed_code">Download predictions.csv</button>
+            <button class="btn ghost" id="dlDetail" disabled>Detailed CSV</button>
+            <span class="note" id="batchNote"></span>
+          </div>
+          <div class="progress" id="progress" hidden><i></i></div>
+          <div class="kpis" id="kpis" hidden>
+            <div><b id="kMapped">0</b><span>mapped</span></div>
+            <div><b id="kLow">0</b><span>low confidence</span></div>
+            <div><b id="kRate">—</b><span>per term</span></div>
+            <div><b id="kElapsed">0s</b><span>elapsed</span></div>
+          </div>
+          <div class="tbl-tools">
+            <input class="field-in slim" id="filter" placeholder="Filter terms or codes…" spellcheck="false">
+            <label class="check"><input type="checkbox" id="lowOnly"> Low confidence only</label>
+          </div>
+          <div class="tbl-wrap"><table class="tbl" id="tbl"><thead><tr>
+            <th>#</th><th>chunk_id</th><th>clinical_entity</th><th>ICD-10-CM</th><th>SNOMED CT</th><th>confidence</th>
+          </tr></thead><tbody id="tbody"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="big-word">TermMap-X</div>
+  <p>HiLabs Hackathon 2026 · No data, scores or prompts live in this repository.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

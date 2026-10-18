@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050507">
+<title>Results — TermMap-X</title>
+<meta name="description" content="One clinical term in, one ICD-10-CM code and one SNOMED CT concept out. Calibrated, local, always a legal code.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='11' cy='16' r='7' fill='%230a84ff'/%3E%3Ccircle cx='21' cy='16' r='7' fill='%23bf5af2' fill-opacity='.85'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="field" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Primary">
+  <a class="brand" href="index.html">TermMap<i>-X</i></a>
+  <a href="lab.html" class="hide-s">Lab</a><a href="index.html#how" class="hide-s">How it thinks</a><a href="results.html" class="hide-s" aria-current="page">Results</a>
+  <a href="lab.html" class="cta" data-magnet>Try it</a>
+</nav>
+
+<main>
+  <div class="page-head"><div class="wrap"><div class="kicker reveal">The numbers</div><h2 class="reveal">Scored once. <em>On a locked test.</em></h2><p class="sub reveal">Blind internal test, grouped by chunk and scored once. The headline is the lower of the two systems.</p></div></div>
+  <section id="numbers" class="after-head">
+    <div class="wrap">
+      <div class="stats">
+        <div class="glass stat reveal" data-spot>
+          <div><div class="big" data-count="70.6" data-dec="1">0<small>%</small></div></div>
+          <div class="lbl"><b>Headline.</b> SNOMED CT on the blind internal test, the lower of the two systems. 95% interval 64.9–75.6.</div>
+        </div>
+        <div class="glass stat wide reveal" data-spot style="--d:80ms">
+          <div>
+            <div style="font-weight:650;letter-spacing:-0.02em;font-size:1.2rem">Three ways to measure the same build</div>
+            <div class="bars">
+              <div class="bar icd"><span>ICD · blind test</span><div class="track"><div class="fill" data-w="72.4"></div></div><b>72.4%</b></div>
+              <div class="bar icd"><span>ICD · held-out replay</span><div class="track"><div class="fill" data-w="68.7"></div></div><b>68.7%</b></div>
+              <div class="bar icd mute"><span>ICD · out-of-fold</span><div class="track"><div class="fill" data-w="74.9"></div></div><b>74.9%</b></div>
+              <div class="bar sn"><span>SNOMED · blind test</span><div class="track"><div class="fill" data-w="70.6"></div></div><b>70.6%</b></div>
+              <div class="bar sn"><span>SNOMED · held-out replay</span><div class="track"><div class="fill" data-w="68.9"></div></div><b>68.9%</b></div>
+              <div class="bar sn mute"><span>SNOMED · out-of-fold</span><div class="track"><div class="fill" data-w="67.5"></div></div><b>67.5%</b></div>
+            </div>
+          </div>
+          <div class="lbl">Out-of-fold numbers were also used to choose components, so the replay (chosen on 60% of chunks, scored on 40%) is the conservative estimate for unseen charts.</div>
+        </div>
+        <div class="glass stat reveal" data-spot>
+          <div><div class="big" data-count="94.3" data-dec="1">0<small>%</small></div></div>
+          <div class="lbl"><b>Recall in the pool.</b> The right ICD code is a candidate for 94.3% of rows (SNOMED 89.6%). That is the ceiling for everything after retrieval.</div>
+        </div>
+        <div class="glass stat reveal" data-spot style="--d:80ms">
+          <div><div class="big" data-count="58" data-dec="0">0<small>%</small></div></div>
+          <div class="lbl"><b>Best single scorer.</b> No model alone passes 58% top-1; the 20-seed stacker is what gets to 70%+.</div>
+        </div>
+        <div class="glass stat reveal" data-spot style="--d:160ms">
+          <div><div class="big" data-count="5" data-dec="0">0<small>s / term</small></div></div>
+          <div class="lbl"><b>Footprint, honestly.</b> About 5 s per term on a 4 GB RTX 2050 with the LLM gate on, 3 GB peak GPU. Built for batch, not for chat.</div>
+        </div>
+      </div>
+
+      <div class="eh reveal">
+        <div class="kicker">Error analysis</div>
+        <h2 style="font-size:clamp(1.8rem,4.4vw,3.2rem)">The bar is 95%. <em>This is where we miss.</em></h2>
+      </div>
+      <div class="principles">
+        <div class="glass principle reveal" data-spot><div class="ic">∅</div><h4>Never in the pool</h4><p>For 5.7% of ICD and 10.4% of SNOMED rows the right code is never retrieved, so no later stage can find it. Retrieval recall caps accuracy.</p></div>
+        <div class="glass principle reveal" data-spot style="--d:80ms"><div class="ic">∞</div><h4>The long tail</h4><p>Codes unseen in training are mapped correctly 62.8% of the time on the internal test. That is reasoning, not memorising, and it is the weakest slice.</p></div>
+        <div class="glass principle reveal" data-spot style="--d:160ms"><div class="ic">⌗</div><h4>Specificity slips</h4><p>“fx of right distal radius” maps to S52.91XB (open fracture, whole forearm) instead of the closed distal-radius code: a confident, wrong specificity call.</p></div>
+      </div>
+      <p class="sub reveal" style="margin-top:28px">Low-confidence rows are flagged in every upload (confidence under 0.5) so a reviewer sees them first. Numbers come from the TermMap-X+ repository’s own evaluation: internal blind test, 243 ICD and 275 SNOMED diagnosis rows, scored once.</p>
+
+      <div class="principles" style="margin-top:56px">
+        <div class="glass principle reveal" data-spot><div class="ic">⌂</div><h4>Stays on your machine</h4><p>Models run locally or on your own GPU. No hosted API, no keys, no PHI leaving the building.</p></div>
+        <div class="glass principle reveal" data-spot style="--d:80ms"><div class="ic">✓</div><h4>Always a legal code</h4><p>Every emitted code is checked against the supplied dictionaries, for both systems, on every row.</p></div>
+        <div class="glass principle reveal" data-spot style="--d:160ms"><div class="ic">◐</div><h4>Knows what it doesn’t know</h4><p>A calibrated confidence per system, and the lower of the two, on every row.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="big-word">TermMap-X</div>
+  <p>HiLabs Hackathon 2026 · No data, scores or prompts live in this repository.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
