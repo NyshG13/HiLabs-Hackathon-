@@ -71,7 +71,7 @@ MS,"echo: rheumatic mitral valve with moderate ms, mean gradient 8 mmhg."
 | `confidence_icd`, `confidence_snomed` | the stacker's calibrated probability for each pick |
 | `confidence` | the lower of the two. Low values flag likely errors and can be used for abstention or review. |
 
-**Check your install:** `python predict.py --input data/splits/test_input.csv --output out.csv` should reproduce `submission/reference_predictions.csv` (our internal test set) exactly on a CUDA GPU.
+**Check your install:** `python predict.py --input data/splits/test_input.csv --output out.csv` should match `submission/reference_predictions.csv`. A fresh run on a CUDA GPU matched all 989 SNOMED codes and 986 of 989 ICD codes: the 3 differences are near-ties that flip with GPU half-precision rounding, and confidences can differ in the 2nd decimal. Two fresh runs on the same input are byte-identical (`submission/determinism.json`, 50 rows). It takes about 4 s per new term on a 4 GB GPU; repeated terms are cached.
 
 ## Environment variables
 
@@ -151,6 +151,16 @@ The frozen recipe is [`artifacts/plus/sf/sf_recipe.json`](artifacts/plus/sf/sf_r
 
 The out-of-fold numbers were also used to select components. A held-out replay of that selection gives 68.7% ICD and 68.9% SNOMED: components were chosen on 60% of the chunks and scored on the other 40%. That is our conservative estimate for unseen data.
 
+## Predictions on the evaluation set
+
+No separate evaluation file was provided, so the evaluation set is **our internal blind test split**: 289 diagnosis terms, 243 ICD and 275 SNOMED gold labels, grouped by chunk and never used for training or selection before it was scored once.
+
+[`submission/evaluation_predictions.csv`](submission/evaluation_predictions.csv) has the columns `chunk_text, clinical_entity, icd10cm_code, snomed_code`, plus a `source_icd` / `source_snomed` column for each code:
+- **`blind_v1`** (518 of the 578 codes): predicted by the engine while the split was still unseen. These score **72.4% ICD** and **70.6% SNOMED**.
+- **`final_model_no_gold`** (60 codes): the term has a gold label for only one system, so the blind run predicted only that system. The other code is filled in by the final engine for completeness. These cells have no gold label and are not scored.
+
+Running today's final engine on this split gives higher numbers (`submission/reference_predictions.csv`), but that score is **not** a valid accuracy. The final engine uses all labelled rows, including this split, as memory and stacker training data, so it has already seen these answers. Use the blind numbers above.
+
 ## Repository layout
 
 | path | contents |
@@ -168,7 +178,8 @@ The out-of-fold numbers were also used to select components. A held-out replay o
 | `data/external/cdc/` | CDC FY2026 ICD-10-CM order file + Alphabetic Index (public domain) |
 | `shared/` | ICD tree, scope |
 | `tests/test_sf_guard.py` | input-guard test |
-| `submission/reference_predictions.csv` | expected output for `data/splits/test_input.csv` |
+| `submission/evaluation_predictions.csv` | predictions on the evaluation set (internal blind test split), judges' schema |
+| `submission/reference_predictions.csv` | expected output of `predict.py` on `data/splits/test_input.csv` (install check) |
 
 ## Security
 
