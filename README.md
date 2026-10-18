@@ -34,41 +34,46 @@ The engine extends **Approach X**, a retrieve → score → decide cascade. Each
 - **A learned stacker** combines those signals to pick one code per system.
 - **A small LLM** is consulted only for low-confidence SNOMED picks.
 
+```mermaid
+flowchart TD
+    IN["<b>INPUT</b><br/>clinical_entity + chunk_text<br/><i>every other column is dropped unread</i>"]
+    N["<b>0 · NORMALISE</b><br/>clean text · abbreviation expansion · typo correction"]
+
+    subgraph R["1 · RETRIEVE · same method for both systems"]
+        R1["BM25 + character TF-IDF + fine-tuned SapBERT<br/>fused by reciprocal rank · up to 64 candidates per system"]
+        R2["+ memory of labelled training terms<br/>+ hierarchy expansion"]
+        R3["ICD only: + tree siblings (unspecified · laterality · 7th character)<br/>+ top-3 codes voted by convention-kNN"]
+    end
+
+    subgraph S["2 · SCORE every candidate"]
+        S1["cross-encoder WITH chart context<br/>cross-encoder, term only"]
+        S2["retrieval scores and ranks · memory hits · code priors<br/>lexical-trap features · diagnosis-type tag flag"]
+        S3["ICD only: kNN votes<br/>+ Qwen3-Reranker-0.6B on the top 10"]
+    end
+
+    IC["<b>3a · ICD stacker</b><br/>LightGBM lambdarank · 20 seeds averaged<br/>highest score wins · no LLM gate"]
+    SN["<b>3b · SNOMED stacker</b><br/>LightGBM lambdarank · trained on both systems' rows<br/>20 seeds averaged · probability p per candidate"]
+    G{"top p at least 0.6?"}
+    Q["<b>Qwen2.5-1.5B-Instruct gate</b><br/>re-checks the top 5<br/>score = log p + 0.25 × LLM log-probability"]
+    OI["<b>OUTPUT</b><br/>icd10cm_code + confidence_icd"]
+    OS["<b>OUTPUT</b><br/>snomed_code + confidence_snomed"]
+
+    IN --> N --> R --> S
+    S --> IC --> OI
+    S --> SN --> G
+    G -- "yes · keep the pick" --> OS
+    G -- "no · 37% of rows" --> Q --> OS
 ```
- INPUT   clinical_entity + chunk_text            (every other column is dropped unread)
-   │
-   ▼
- 0 · NORMALISE   clean text · abbreviation expansion (dictionary + training conventions) · typo correction
-   │
-   ▼
- 1 · RETRIEVE (same method for both systems)                             gold code in the pool:
-     BM25 + character TF-IDF + fine-tuned SapBERT,                         ICD 94.3% · SNOMED 89.6%
-     fused by reciprocal rank (≤ 64 candidates per system)               top-1 of the fusion alone:
-     + memory of labelled training terms + hierarchy expansion             ICD 41.5% · SNOMED 48.2%
-     ICD only: + tree siblings (unspecified / laterality / 7th character)
-               + top-3 codes voted by convention-kNN (similar training terms)
-   │
-   ▼
- 2 · SCORE every candidate                                               best single scorer:
-     X's cross-encoder with chart context  ·  X's cross-encoder, term only    ICD 52.3% · SNOMED 55.8%
-     retrieval scores and ranks · memory hits · code priors
-     lexical-trap features (extra / missing words, head noun, abbreviation, laterality, acuity)
-     diagnosis-type tag flag (SNOMED semantic tag)
-     ICD only: kNN votes + Qwen3-Reranker-0.6B zero-shot score on the top 10
-   │
-   ├──────────────────────────────────────┐
-   ▼                                      ▼
- 3 · DECIDE (per system)
-   ICD stacker                            SNOMED stacker
-   LightGBM (lambdarank), ICD rows,       LightGBM (lambdarank), trained on both systems' rows,
-   20 seeds averaged → highest score      20 seeds averaged → probability p per candidate
-   (no LLM gate)                          top p ≥ 0.6 → keep the pick
-                                          top p < 0.6 → Qwen2.5-1.5B-Instruct re-checks the top 5:
-                                                        final score = log p + 0.25 × LLM log-probability
-   │                                      │
-   ▼                                      ▼
- OUTPUT  icd10cm_code + snomed_code (always valid dictionary codes) + a confidence for each
-```
+
+**What each stage achieves** (out-of-fold, ICD / SNOMED):
+
+| stage | job | measured |
+|---|---|---|
+| **1 · Retrieve** | recall: get the right code into a short list | gold code in the pool: **94.3% / 89.6%**; top-1 of the fusion alone: 41.5% / 48.2% |
+| **2 · Score** | describe every candidate with many signals | best single scorer (context cross-encoder): **52.3% / 55.8%** |
+| **3 · Decide** | combine the signals into one pick per system | final model: **74.9% / 67.5%** out-of-fold; **72.4% / 70.5%** on the blind test |
+| Qwen2.5 gate | second opinion on unsure SNOMED picks only | called on 37% of SNOMED rows; adds about 2 points |
+| Output | one valid code per system + a confidence | always a code from the supplied dictionaries |
 
 **Why this shape:**
 - **Lexical and dense retrieval together.** BM25 and TF-IDF catch exact and rare wording; SapBERT catches paraphrases and abbreviations.

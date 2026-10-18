@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>TermMap-X+ Write-up</title>
+<style>
+@page { size: A4; margin: 12mm 13mm 12mm 13mm; }
+:root { --ink:#1b1f24; --mute:#5b6470; --line:#d5dae0; --acc:#0f6e6e; --soft:#eef5f5; }
+* { box-sizing: border-box; }
+body { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 8.9pt; line-height: 1.32; color: var(--ink); background:#fff; margin:0; }
+h1 { font-size: 15pt; margin: 0 0 1mm; letter-spacing:-.2px; }
+h2 { font-size: 10.4pt; color: var(--acc); margin: 3.2mm 0 1.2mm; padding-bottom: .6mm; border-bottom: 1px solid var(--line); }
+h3 { font-size: 9.2pt; margin: 2mm 0 .8mm; }
+p { margin: 0 0 1.5mm; }
+.sub { color: var(--mute); font-size: 8.4pt; margin-bottom: 2mm; }
+.kpis { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.6mm; margin: 2mm 0 1mm; }
+.kpi { background: var(--soft); border-radius: 2mm; padding: 1.6mm 2mm; }
+.kpi b { display:block; font-size: 12pt; color: var(--acc); line-height:1.1; }
+.kpi span { font-size: 7.4pt; color: var(--mute); }
+table { border-collapse: collapse; width: 100%; margin: 1mm 0 2mm; font-size: 8.1pt; }
+th, td { border-bottom: 1px solid var(--line); padding: .8mm 1.4mm; text-align: left; vertical-align: top; }
+th { background: #f4f6f8; font-weight: 600; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+ul { margin: 0 0 1.5mm 4.5mm; padding: 0; } li { margin: 0 0 .5mm; }
+.flow { display: flex; gap: 1.2mm; align-items: stretch; margin: 1.5mm 0 2mm; font-size: 7.6pt; }
+.box { flex: 1; border: 1px solid var(--acc); border-radius: 1.6mm; padding: 1.3mm 1.6mm; background:#fbfdfd; }
+.box b { color: var(--acc); display:block; font-size: 8pt; margin-bottom: .4mm; }
+.arr { align-self: center; color: var(--acc); font-weight: 700; }
+.box .m { color: var(--mute); display:block; margin-top: .6mm; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.note { color: var(--mute); font-size: 7.8pt; }
+code { font-family: Consolas, monospace; font-size: 7.9pt; background: #f2f4f6; padding: 0 .6mm; border-radius: .6mm; }
+.pb { break-before: page; }
+</style></head><body>
+
+<h1>TermMap-X+: clinical term mapping to ICD-10-CM and SNOMED CT</h1>
+<div class="sub">HiLabs Hackathon 2026 · write-up · code: <code>github.com/NyshG13/HiLabs-Hackathon-</code> (private) · one command: <code>python predict.py --input eval.csv --output predictions.csv</code></div>
+
+<div class="kpis">
+ <div class="kpi"><b>70.5%</b><span>headline = lower of the two (blind test, SNOMED)</span></div>
+ <div class="kpi"><b>72.4%</b><span>ICD-10-CM exact, blind [66.5, 77.7]</span></div>
+ <div class="kpi"><b>70.5%</b><span>SNOMED CT exact, blind [64.9, 75.6]</span></div>
+ <div class="kpi"><b>63.2%</b><span>SNOMED on codes never seen in training (n=136)</span></div>
+ <div class="kpi"><b>81.5%</b><span>ICD right 3-character category (blind)</span></div>
+ <div class="kpi"><b>60% / 50%</b><span>ICD / SNOMED auto-coded at 90% precision</span></div>
+</div>
+
+<h2>1. Problem and scope</h2>
+<p><b>Scope:</b>
+diagnosis and condition terms only: 5,005 of the 9,646 labelled rows, 2,305 ICD-10-CM and 2,700 SNOMED CT.
+<b>Input:</b> only the term and its chunk text. <b>Output:</b> one pre-coordinated code per system, always taken from the supplied dictionaries, so we never emit an illegal code.
+The two systems are predicted <b>independently</b>; neither is derived from the other through a crosswalk.
+Nothing reads the <code>subconcept</code> column at prediction time, because the evaluation file will not have it.</p>
+<p><b>Evaluation design:</b>
+an 80/10/10 split <b>grouped by chunk</b> (seed 13), so that no chart text appears in two parts.
+The internal test split was scored <b>once</b>, blind; those are the headline numbers.
+After that, every change was judged on pooled dev+test with 5 chunk-grouped folds and a 20-seed stacker, under a rule declared in advance:
+<i>keep a change only if accuracy rises, fixed − broken ≥ √(fixed + broken), and unseen-code accuracy drops by no more than 1.5 points</i>.
+The 95% bar is far above what we reach (about 70%); sections 4 and 5 explain where the remaining 30% goes.</p>
+
+<h2>2. Approach and why</h2>
+<div class="flow">
+ <div class="box"><b>0 · Normalise</b>clean text, abbreviation expansion (dictionary + training conventions), typo gate</div><div class="arr">→</div>
+ <div class="box"><b>1 · Retrieve</b>BM25 + char TF-IDF + fine-tuned SapBERT, reciprocal-rank fusion, ≤ 64 per system; training-term memory; hierarchy expansion. ICD: tree siblings + convention-kNN codes<span class="m">gold in pool 94.3 / 89.6 · fused top-1 41.5 / 48.2</span></div><div class="arr">→</div>
+ <div class="box"><b>2 · Score</b>BiomedBERT cross-encoders (term + chart context; term only), retrieval ranks, memory hits, priors, lexical-trap and qualifier features, diagnosis-tag flag. ICD: kNN votes + Qwen3-Reranker-0.6B<span class="m">best single scorer 52.3 / 55.8</span></div><div class="arr">→</div>
+ <div class="box"><b>3 · Decide</b>LightGBM lambdarank, 20 seeds: an ICD-only stacker, and a shared stacker for SNOMED. SNOMED rows with p &lt; 0.6 (37%) are re-checked by Qwen2.5-1.5B (log p + 0.25 · LLM log-prob)<span class="m">final out-of-fold 74.9 / 67.5</span></div>
+</div>
+<ul>
+<li><b>Hybrid retrieval, because recall is the ceiling.</b> BM25 and TF-IDF catch exact and rare wording, where embeddings are weak; SapBERT, fine-tuned on training terms, catches paraphrases ("dry heaved" → vomiting). With ≤ 64 candidates the gold is retrieved 94% (ICD) and 90% (SNOMED) of the time. But the fused ranking is right only 41–48% of the time, so the decision has to come later.</li>
+<li><b>Cross-encoders read the term in its context.</b> A BiomedBERT cross-encoder sees the term, an anchored window of the chunk, and each candidate's description and hierarchy. It is trained listwise (1 gold vs 7 hard negatives, plus synthetic noisy variants), and this is what resolves collisions like <i>MS</i> → multiple sclerosis vs mitral stenosis. It is the best single model (52–56%), yet still far from the final number.</li>
+<li><b>A learned stacker, not hand-written rules, sets the specificity policy.</b> We add the "unspecified" sibling, the laterality variants and the 7th-character variants into the pool. Features (unspecified flag, depth, billable, laterality/acuity conflict, extra or missing words, code priors) then let LightGBM learn when the coders choose E11.9 over a complication code. Combining ~55 signals adds <b>+23 points (ICD) and +12 points (SNOMED)</b> over the best single model; averaging 20 seeds removes about ±1 point of seed noise.</li>
+<li><b>Mining local convention.</b> A convention kNN lets the nearest labelled training terms vote for codes (ICD +1.5). A training-term memory recognises terms the coders have already labelled.</li>
+<li><b>LLMs only where judgement is needed.</b> Qwen2.5-1.5B re-checks only low-confidence SNOMED picks (37% of rows; +2.0 points). It is deterministic: one forward pass with no sampling. It is off for ICD, where it hurt. Qwen3-Reranker-0.6B is used zero-shot as one more ICD feature (+1.1).</li>
+<li><b>Everything is local and open-weight.</b> No data leaves the machine, as the data-use rules require.</li>
+</ul>
+
+<h2>3. Results against the judging criteria</h2>
+<table>
+<tr><th>criterion</th><th>measure</th><th class="n">ICD-10-CM</th><th class="n">SNOMED CT</th></tr>
+<tr><td rowspan="4"><b>Mapping accuracy</b> (50%)</td><td>exact match, blind test, scored once (243 / 275 rows)</td><td class="n"><b>72.4%</b> [66.5, 77.7]</td><td class="n"><b>70.5%</b> [64.9, 75.6]</td></tr>
+<tr><td>final model, out-of-fold (470 / 541 rows)</td><td class="n">74.9%</td><td class="n">67.5%</td></tr>
+<tr><td>held-out replay of our own selection (chosen on 60% of chunks, scored on 40%)</td><td class="n">68.7%</td><td class="n">68.9%</td></tr>
+<tr><td>3 re-drawn chunk-grouped fold splits (stability)</td><td class="n">71.3–73.0%</td><td class="n">64.7–65.8%</td></tr>
+<tr><td rowspan="3"><b>Long tail</b> (20%)</td><td>share of rows whose gold code never appears in training</td><td class="n">21%</td><td class="n">50%</td></tr>
+<tr><td>accuracy on those unseen codes: blind / out-of-fold</td><td class="n">61.5% / 63.4%</td><td class="n"><b>63.2%</b> / 59.7%</td></tr>
+<tr><td>accuracy on seen codes, out-of-fold (gap to unseen)</td><td class="n">78.0% (−14.6)</td><td class="n">75.7% (−16.0)</td></tr>
+<tr><td><b>Partial credit</b></td><td>ICD right 3-character category: blind / out-of-fold</td><td class="n">81.5% / 81.7%</td><td class="n">–<sup>1</sup></td></tr>
+<tr><td><b>Abstention</b></td><td>share auto-coded at ≥ 90% precision, using the output confidence; calibration error (ECE)</td><td class="n">60% at ≥ 0.76 · ECE 0.05</td><td class="n">50% at ≥ 0.75 · ECE 0.04</td></tr>
+<tr><td rowspan="2"><b>Engineering</b> (15%)</td><td>latency per new term, 4 GB laptop GPU (retrieval p50 0.9 s, p95 2.0 s); repeats are cached</td><td class="n" colspan="2">3.9 s per term · Qwen2.5 call on 37% of SNOMED rows only</td></tr>
+<tr><td>footprint · determinism</td><td class="n" colspan="2">RAM 3.6 GB, VRAM 3.1 GB, disk 7.3 GB · two fresh runs byte-identical</td></tr>
+</table>
+<p class="note">Intervals are 95% Wilson. <sup>1</sup> The SNOMED IS-A distance cannot be computed: the supplied SNOMED table has descriptions but no relationships. The long tail is where the engine reasons rather than memorises: it gets 60% or more of codes it has never seen, against 31.8% for convention-kNN alone on all SNOMED rows.</p>
+
+<h2>4. What we tried, kept and abandoned</h2>
+<table>
+<tr><th>idea (top-1 change in points, out-of-fold)</th><th class="n">ICD</th><th class="n">SNOMED</th><th>outcome</th></tr>
+<tr><td>ICD tree siblings in the pool (unspecified, laterality, 7th character)</td><td class="n">+1.3</td><td class="n">+1.5</td><td>kept</td></tr>
+<tr><td>Lexical-trap features (extra or missing words, head noun, abbreviation)</td><td class="n">0.0</td><td class="n">+1.5</td><td>kept</td></tr>
+<tr><td>Convention kNN (votes + top-3 voted codes)</td><td class="n">+1.5</td><td class="n">−0.6</td><td>kept for ICD</td></tr>
+<tr><td>Qwen3-Reranker-0.6B zero-shot feature</td><td class="n">+1.1</td><td class="n">+0.4</td><td>kept for ICD</td></tr>
+<tr><td>Qwen2.5 SNOMED gate (effect of switching it off)</td><td class="n">0.0</td><td class="n">−2.0</td><td>kept for SNOMED</td></tr>
+<tr><td>Subconcept-free cross-encoder query + diagnosis-tag flag (needed: the evaluation file has no subconcept)</td><td class="n">−0.2</td><td class="n">−0.2</td><td>kept</td></tr>
+<tr><td>Hard clinical checklist veto (laterality / acuity / status)</td><td class="n">−1.3</td><td class="n">−1.2</td><td>abandoned: too blunt</td></tr>
+<tr><td>Larger SNOMED LLM (Qwen3-8B with kNN examples, JSON choice)</td><td class="n">0.0</td><td class="n">+0.9</td><td>abandoned: not significant, ~5× the parameters</td></tr>
+<tr><td>Smarter gate, negation alignment, convention priors, ICD release priors</td><td class="n">−0.6…0</td><td class="n">−0.4…0</td><td>abandoned</td></tr>
+<tr><td>Own reranker (CE-2) trained on our pools, as extra features</td><td class="n">−1.7</td><td class="n">+0.9</td><td>passed for SNOMED; not shipped</td></tr>
+<tr><td>Qwen LoRA reranker; semantic-tag filter; tree-evidence / specificity-policy features</td><td class="n">–</td><td class="n">–</td><td>abandoned (diverged / no gain)</td></tr>
+</table>
+
+<h2>5. Error analysis: where it still fails, and why</h2>
+<table>
+<tr><th>failure mode (blind test errors)</th><th class="n">ICD (67)</th><th class="n">SNOMED (81)</th><th>examples (term → gold · our prediction)</th></tr>
+<tr><td><b>Gold never retrieved</b> (a recall ceiling)</td><td class="n">11 (16%)</td><td class="n">22 (27%)</td><td>"asalr" (unexpanded abbreviation); "atypicals" → antipsychotic agent; "critically ill" → <i>Patient's condition poor</i></td></tr>
+<tr><td><b>Right category, wrong specificity</b></td><td class="n">20 (30%)</td><td class="n">–</td><td>"candidiasis of the genitals" → B37.49 · B37.9; "atrial tach" → I47.1 (split into sub-codes in FY2023) · I47.19 (a valid FY2026 leaf)</td></tr>
+<tr><td><b>Wrong concept</b></td><td class="n">36 (54%)</td><td class="n">59 (73%)</td><td>two conditions in one term: "asthma, uncontrolled t2dm"; combination code: "CKD … hypertension" → I12.9 · N18.9</td></tr>
+</table>
+<ul>
+<li><b>Negation and context.</b> SNOMED codes negated findings as "normal/absent" concepts: "acute changes" → <i>No status change</i>, and "acute ischemic ECG changes" → <i>ECG no myocardial ischemia</i>, because the chunk negates them. Our term-centred scorers miss this. A negation-alignment feature did not help (−0.6 ICD).</li>
+<li><b>SNOMED granularity and semantic tags.</b> Accuracy is 76% on <i>disorder</i> and 69% on <i>finding</i> concepts, but only 44% on <i>observable entity</i>, 30% on <i>morphologic abnormality</i> and 19% on <i>situation</i>. In 97 of 176 out-of-fold SNOMED errors the prediction has the right semantic tag but the wrong concept. In other words, the coders' tag convention (finding vs morphology vs disorder) is only partly learnable from 2,700 labelled rows.</li>
+<li><b>ICD chapters.</b> The weakest chapter is musculoskeletal (M, 58%, n=59), followed by L (69%) and Z (71%); C, K and E are 87–100%. The large symptom chapter R (n=149) sits at 74%, mostly on catch-all codes such as R29.898 and R68.89.</li>
+<li><b>Label noise sets a ceiling.</b> We hand-audited 100 picking misses. In 38–43% of them the gold label was arguable or the prediction equally valid: near-duplicate SNOMED concepts, ICD headers or older-release codes versus valid FY2026 leaves, and identical training text carrying the predicted code. Another 43–60% were learnable conventions, and ≤ 13% needed context.</li>
+<li><b>The gate is a double-edged sword.</b> In 17 of 119 SNOMED picking misses, Qwen2.5 overrode a correct stacker pick, even though it is a net +2 points.</li>
+</ul>
+<p><b>Plan for the remaining gap</b>, in order of expected gain:
+(1) <b>Recall:</b> context-conditioned abbreviation expansion and the CDC index lookup, which are already built as features but not yet evaluated, plus larger SNOMED pools. These target the 16–27% of errors that are never retrieved.
+(2) <b>SNOMED long tail:</b> ship the in-domain reranker that already passed the keep rule (+0.9), and add the SNOMED IS-A hierarchy for granularity decisions.
+(3) <b>Specificity as an explicit decision:</b> choose the 3-character category first (already 81.5% right), then descend.
+(4) <b>Combination codes and two-condition terms:</b> rules for known pairs (e.g. I12.x for hypertension with CKD).
+(5) <b>Release drift:</b> map older-release and header golds to FY2026 leaves using the CDC addenda, and rebuild the dictionaries automatically each October and twice a year for SNOMED.
+(6) <b>A gate trained to predict when overriding helps,</b> and abstention: routing the 40–50% of low-confidence terms to review gives 90%-precision automatic coding today.</p>
+
+<h2>6. Open questions: our positions</h2>
+<ul>
+<li><b>Partial credit or strict?</b> The headline should stay <b>strict exact match</b>, and we report it that way. Partial credit should be published alongside it, because it separates very different failures: our ICD exact is 72.4% but the category is right 81.5% of the time, so nearly a third of ICD errors are specificity, not misunderstanding. For SNOMED we would need the IS-A relationships to compute hierarchy distance.</li>
+<li><b>Ambiguous gold answers?</b> In the data, no (term, chunk, system) carries two golds, so we score strictly against the single gold. Our audit shows real ambiguity, though: near-duplicate SNOMED concepts (coronary <i>atherosclerosis</i> vs <i>arteriosclerosis</i>), and header or older-release ICD codes. We propose accepting a small, <b>adjudicated set of equivalent codes</b> for such pairs, reported as a lenient secondary metric so the strict headline stays comparable.</li>
+<li><b>More than one annotator?</b> We could not measure inter-annotator agreement: each row has one gold. Our audit suggests the practical ceiling is clearly below 100%. We recommend double-annotating a few hundred evaluation rows and <b>publishing agreement as the ceiling</b>; otherwise 95% may sit above what annotators themselves agree on.</li>
+<li><b>Per-category minimums?</b> Yes, with a minimum sample size per category (e.g. chapters with ≥ 30 rows), since small chapters are noisy. Our per-chapter report shows what a floor would catch: chapter M at 58% versus E/K above 87%.</li>
+</ul>
+
+<h2>7. Engineering, reproducibility, and external resources</h2>
+<p><b>Engineering:</b>
+<code>git clone</code> (trained weights come via Git LFS) → <code>pip install -r requirements.txt</code> → <code>python setup_model.py</code> (verifies the sha256 of all weights and downloads the two Qwen models at pinned revisions) → <code>python predict.py --input eval.csv --output predictions.csv</code>.</p>
+<ul>
+<li><b>Deterministic:</b> fixed seeds, and the LLMs run without sampling. Two fresh runs are byte-identical, and a fresh clone reproduced the reference predictions on 986/989 ICD and 989/989 SNOMED codes; the 3 differences are near-ties that flip with GPU half-precision rounding.</li>
+<li><b>Robust input handling:</b> an input guard drops any extra column, and <code>make test</code> proves the output is unchanged.</li>
+<li><b>Safe:</b> no API keys exist; <code>.env</code> is git-ignored. <code>score.py</code> reproduces every number above from the submitted predictions.</li>
+<li><b>Deployability:</b> 3.9 s per new term on a 4 GB laptop GPU is the honest figure. Most of it is cross-encoder scoring of about 70 candidates and the Qwen3 pass, which batch well on a server GPU. A CPU-only mode without Qwen3 keeps ICD at 73.8%.</li>
+</ul>
+<table>
+<tr><th>external resource (all named, licence-compatible)</th><th>role</th><th>licence</th></tr>
+<tr><td>cambridgeltl/SapBERT-from-PubMedBERT-fulltext</td><td>dense retriever, fine-tuned on training terms</td><td>Apache-2.0</td></tr>
+<tr><td>microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext</td><td>base of both cross-encoders, fine-tuned</td><td>MIT</td></tr>
+<tr><td>Qwen/Qwen3-Reranker-0.6B @ e61197e</td><td>ICD zero-shot scorer, used as is</td><td>Apache-2.0</td></tr>
+<tr><td>Qwen/Qwen2.5-1.5B-Instruct @ 989aa79</td><td>SNOMED low-confidence gate, used as is</td><td>Apache-2.0</td></tr>
+<tr><td>CDC/NCHS ICD-10-CM FY2026 order file and Alphabetic Index</td><td>hierarchy, billable flags, index aliases</td><td>public domain</td></tr>
+<tr><td>Supplied ICD-10-CM and SNOMED CT tables; LightGBM, scikit-learn, PyTorch, transformers, rapidfuzz</td><td>answer space; stacker and inference</td><td>as supplied; MIT / BSD / Apache-2.0</td></tr>
+</table>
+<p class="note">UMLS and the official SNOMED→ICD-10-CM map were not used; the map is a candidate signal for joint consistency in future work. Every number in this write-up is reproducible from the repository (<code>score.py</code>) or from the development ledgers in <code>results/</code>.</p>
+</body></html>
