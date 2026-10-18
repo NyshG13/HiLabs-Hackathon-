@@ -107,29 +107,28 @@ All settings (features, the 20 seeds, the diagnosis-type tag list, the memory) a
 
 **Requirements:**
 - Python 3.11
-- [Git LFS](https://git-lfs.com), because the trained weights are stored in this repository with it
 - about 8 GB of free disk space
-- internet once, for `pip` and the two Qwen models
+- internet once, for `pip`, our trained weights (Hugging Face) and the two Qwen models
 - an NVIDIA GPU is optional but much faster (tested on a 4 GB RTX 2050)
 
 ```bash
-git lfs install                                          # once per machine, BEFORE cloning
-git clone <this repo> termmap-xplus                      # code + data + 3.0 GB of trained weights (LFS)
+git clone <this repo> termmap-xplus                      # code + data (weights come from Hugging Face)
 cd termmap-xplus
 python -m venv .venv
 source .venv/bin/activate                                # Windows: .venv\Scripts\activate
 pip install -r requirements.txt                          # pinned versions; torch 2.14.1 with CUDA 12.6
-python setup_model.py                                    # checks the weights (sha256), downloads the 2 Qwen models
+python setup_model.py                                    # downloads + checks our weights, downloads the 2 Qwen models
 ```
 
-`setup_model.py` does two things:
-1. It checks all 16 trained weight files against [`artifacts/WEIGHTS_MANIFEST.json`](artifacts/WEIGHTS_MANIFEST.json).
-2. It downloads Qwen2.5-1.5B-Instruct and Qwen3-Reranker-0.6B from their official pages at pinned revisions, with no account or token.
+`setup_model.py` does three things:
+1. It downloads our 3.0 GB of trained weights from **[huggingface.co/redolance/termmap-xplus-weights](https://huggingface.co/redolance/termmap-xplus-weights)** into the same paths the code reads (`models/`, `data/processed/`).
+2. It checks all 16 trained weight files against [`artifacts/WEIGHTS_MANIFEST.json`](artifacts/WEIGHTS_MANIFEST.json).
+3. It downloads Qwen2.5-1.5B-Instruct and Qwen3-Reranker-0.6B from their official pages at pinned revisions, with no account or token.
 
 After that, nothing else is downloaded.
 
 **Troubleshooting:**
-- **"Git LFS pointers":** the repository was cloned without Git LFS. Run `git lfs install && git lfs pull`.
+- **"missing or modified" / placeholders:** the weight download was interrupted. Run `python setup_model.py` again; it resumes.
 - **Windows path limit:** clone into a short folder, for example `C:\work\termmap-xplus`. Some model-cache paths inside the repository are about 120 characters long, and Windows refuses paths over 260 characters unless long paths are enabled.
 - **No GPU:** set `TERMMAP_DEVICE=cpu`. Everything still runs, but it is much slower.
 
@@ -208,7 +207,7 @@ chronickidney disease stag 3,"assessment: chronickidney disease stag 3, egfr 45.
 | **LLM gate: share of rows sent to Qwen2.5** | 0% (no gate for ICD) | **37%** (202 / 541 out-of-fold) |
 | **Run command** | `python predict.py --input <evaluation_file.csv> --output predictions.csv` | |
 | **Speed** | **3.9 s per new term** on a 4 GB RTX 2050 (retrieval p50 0.9 s / p95 2.0 s); repeated terms cached | |
-| **Size** | peak **RAM 3.6 GB** · peak **VRAM 3.1 GB** · **disk 7.3 GB** (repo 3.2 GB + Qwen models 4.1 GB) | |
+| **Size** | peak **RAM 3.6 GB** · peak **VRAM 3.1 GB** · **disk 7.3 GB** (repo 0.2 GB + our weights 3.0 GB + Qwen models 4.1 GB) | |
 | **Determinism** | two fresh runs on the same input are byte-identical | |
 
 Details for each row follow.
@@ -272,7 +271,7 @@ python predict.py --input <evaluation_file.csv> --output predictions.csv
 | Repeated terms | cached; much faster |
 | Peak GPU memory (VRAM) | **3.1 GB** |
 | Peak RAM | **3.6 GB** (peak working set of the engine process, measured on a 40-term run) |
-| Disk | **7.3 GB**: repository 3.2 GB (of which 3.0 GB trained weights via LFS) + Qwen2.5 2.9 GB + Qwen3 1.2 GB |
+| Disk | **7.3 GB**: repository 0.2 GB + 3.0 GB trained weights (Hugging Face) + Qwen2.5 2.9 GB + Qwen3 1.2 GB |
 | Model calls per term | 2 cross-encoder passes per candidate; Qwen3 on the top 10 (ICD); Qwen2.5 once for ~37% of SNOMED terms |
 
 At chart volume, a server GPU would cut latency several-fold. The CPU-only fallback avoids the Qwen3 call.
@@ -372,19 +371,19 @@ Neither the UMLS nor the official SNOMED→ICD-10-CM map is used.
 | path | contents |
 |---|---|
 | `predict.py` | **entry point:** CSV in → CSV out |
-| `setup_model.py` | one-time setup: verify trained weights, download the two Qwen models |
+| `setup_model.py` | one-time setup: download + verify trained weights, download the two Qwen models |
 | `score.py` | score a predictions CSV against the internal test split |
 | `Makefile` | `make install / setup / predict / demo / test` |
 | `termmap/` | Approach X engine: normalisation, retrieval, dense encoder, cross-encoders, features, stacker, LLM gate |
 | `termmap_plus/` | X+ additions: ICD siblings, convention kNN, lexical traps, Qwen3 scorer, subconcept-free predict path (`predict_sf.py`) |
 | `round3/` | subconcept-free cross-encoder query and diagnosis-tag flag (`sf.py`) |
-| `models/sapbert-ft/`, `models/cross-ctx/`, `models/cross-noctx/` | trained models (Git LFS) |
+| `models/sapbert-ft/`, `models/cross-ctx/`, `models/cross-noctx/` | trained models (downloaded from Hugging Face by `setup_model.py`) |
 | `models/stack_settings.pkl` | stacker temperature |
 | `artifacts/plus/sf/` | frozen recipe (`sf_recipe.json`) and the 20-seed stackers (`stackers_none_dtag.pkl`) |
 | `artifacts/WEIGHTS_MANIFEST.json` | sha256 of every trained weight file |
 | `data/raw/` | hackathon training CSV, ICD-10-CM and SNOMED CT code tables |
 | `data/splits/` | train / dev / test split (seed 13, grouped by chunk) |
-| `data/processed/` | concept and alias tables, abbreviations, typo vocabulary, dense + lexical alias indexes (Git LFS) |
+| `data/processed/` | concept and alias tables, abbreviations, typo vocabulary, dense + lexical alias indexes (Hugging Face) |
 | `data/external/cdc/` | CDC FY2026 ICD-10-CM files |
 | `shared/` | ICD tree, scope |
 | `configs/plus.yaml` | X+ flags |

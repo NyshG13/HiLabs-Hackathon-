@@ -1,6 +1,6 @@
 # TermMap-X+ (tag xplus-sf)
 #   make install                               pip install -r requirements.txt
-#   make setup                                 verify trained weights (Git LFS) + download the 2 public Qwen models
+#   make setup                                 download trained weights (Hugging Face) + verify + download the 2 public Qwen models
 #   make predict INPUT=my_terms.csv OUTPUT=predictions.csv
 #   make demo                                  data/splits/test_input.csv -> submission/demo_predictions.csv
 #   make test                                  input-guard test (extra columns -> byte-identical output)

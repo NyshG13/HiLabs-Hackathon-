@@ -21,10 +21,10 @@ class XPlusEngine:
         root = Path(root).expanduser().resolve()
         if not (root / "termmap_plus" / "predict_sf.py").exists():
             raise FileNotFoundError(f"no TermMap-X+ checkout at {root} (set --engine-dir or TERMMAP_XPLUS_DIR)")
-        # the weights are Git LFS objects: a clone made without LFS holds ~130-byte pointer files instead
+        # the weights live on Hugging Face and are fetched by setup_model.py
         probe = root / "models" / "cross-ctx" / "model.safetensors"
-        if probe.exists() and probe.stat().st_size < 1_000_000:
-            raise RuntimeError("model weights are Git LFS pointers; run `git lfs install && git lfs pull` in " + str(root))
+        if not probe.exists() or probe.stat().st_size < 1_000_000:
+            raise RuntimeError("trained weights missing; run `python setup_model.py` in " + str(root))
         sys.path.insert(0, str(root))
         import pandas as pd
         from termmap import config as C

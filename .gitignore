@@ -1,5 +1,9 @@
 # secrets: never commit real keys (see .env.example)
 .env
+# trained weights: hosted on Hugging Face, fetched by setup_model.py
+models/*/model.safetensors
+data/processed/dense_*.npy
+data/processed/lexical_*.pkl
 # python
 .venv/
 __pycache__/
@@ -15,3 +19,4 @@ artifacts/plus/ce_cache.parquet
 artifacts/plus/llm_cache.jsonl
 submission/predictions.csv
 submission/demo_predictions.csv
+.cache/
