@@ -8,9 +8,8 @@ TermMap-X+ maps a clinical term extracted from a chart, read together with the c
 
 | | ICD-10-CM | SNOMED CT |
 |---|---|---|
-| **Blind internal test, scored once** (243 / 275 diagnosis rows) | **72.4%** [66.5, 77.7] | **70.5%** [64.9, 75.6] |
+| **Blind internal test, scored once** (243 / 275 diagnosis rows) | **72.4%** | **70.5%** |
 | Final model, out-of-fold (470 / 541 rows, 5 chunk-grouped folds) | 74.9% | 67.5% |
-| Expected on new, unseen data | ~70% | ~68–70% |
 
 Contents:
 1. [How it works](#1-how-it-works-the-pipeline)
