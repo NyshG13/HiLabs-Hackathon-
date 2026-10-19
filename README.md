@@ -6,7 +6,7 @@ TermMap-X+ maps a clinical term extracted from a chart, read together with the c
 - **Fully local:** every model runs on your machine, with no API calls, no keys, and no data leaving the machine.
 - **Deterministic** for a fixed input.
 
-- Web app: we also built a working browser version: termmap-x.vercel.app/lab.html. Map one term or upload a whole CSV.
+- Web app: we also built a working browser version: [https://termmap-x.vercel.app/](https://termmap-x.vercel.app/). Map one term or upload a whole CSV.
 
 Our laptops have no GPU, so the site must be connected to a GPU runtime to run the full engine. Without it, only a few built-in examples work.
 Please give us a heads-up before uploading a large file so we can connect the runtime first.
